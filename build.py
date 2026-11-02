@@ -197,6 +197,7 @@ def footer(ctx):
     <a href="{ctx.url('privacy')}">{e(c['privacy'])}</a>
   </div>
 </footer>
+<script src="{ctx.asset('config.js')}" defer></script>
 <script src="{ctx.asset('js/site.js')}" defer></script>
 </body>
 </html>
