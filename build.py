@@ -13,6 +13,7 @@ import re
 import shutil
 from html import escape as e
 from pathlib import Path
+from urllib.parse import urlparse
 
 ROOT = Path(__file__).parent
 SITE = ROOT / "site"
@@ -26,6 +27,9 @@ PHONE_TEL = "+34686042200"
 EMAIL = "info@physiofit365.com"
 FACEBOOK = "https://www.facebook.com/physiofit365"
 INSTAGRAM = "https://www.instagram.com/physiofit365"
+BASE_PATH = urlparse(BASE_URL).path          # "" on a custom domain, "/physiofit365" on GitHub project pages
+OG_IMAGE = f"{BASE_URL}/assets/img/og-image.jpg"
+OG_LOCALES = {"en": "en_US", "nl": "nl_NL", "es": "es_ES"}
 
 ICONS = {
     "manual": '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 11V5.5a1.5 1.5 0 0 1 3 0V10m0-1V4a1.5 1.5 0 0 1 3 0v5m0-3.5a1.5 1.5 0 0 1 3 0V11m0-3a1.5 1.5 0 0 1 3 0v6a7 7 0 0 1-7 7h-1a7 7 0 0 1-5.6-2.8L4 14.5a1.6 1.6 0 0 1 2.5-2L7 13"/></svg>',
@@ -86,9 +90,9 @@ def photo(ctx, mode="lazy"):
     """Mellany's photo. Drop it at site/assets/img/mellany.jpg; until then show a branded placeholder."""
     if (SITE / "assets" / "img" / "mellany.jpg").exists():
         extra = ' fetchpriority="high"' if mode == "eager" else ' loading="lazy"'
-        return (f'<img src="{ctx.asset("img/mellany.jpg")}" alt="Mellany Ginny van Hoeven" '
+        return (f'<img src="{ctx.asset("img/mellany.jpg")}" alt="{e(ctx.t["common"]["photo_alt"])}" '
                 f'width="460" height="365"{extra}>')
-    return (f'<div class="photo-placeholder" role="img" aria-label="Mellany Ginny van Hoeven">'
+    return (f'<div class="photo-placeholder" role="img" aria-label="{e(ctx.t["common"]["photo_alt"])}">'
             f'<img src="{ctx.asset("img/logo.png")}" alt="" width="260"></div>')
 
 
@@ -96,12 +100,17 @@ def abs_url(lang, page):
     return f"{BASE_URL}/{lang}/{PATHS[page]}"
 
 
-def head(ctx, title, description):
+def head(ctx, title, description, jsonld=""):
     t = ctx.t
-    full_title = f"{title} | {t['site_name']}" if ctx.page != "home" else f"{t['site_name']} – {title}"
+    page_t = t[ctx.page] if ctx.page in t else {}
+    full_title = page_t.get("seo_title") or f"{title} | {t['site_name']}"
     alts = "\n".join(
         f'<link rel="alternate" hreflang="{l}" href="{abs_url(l, ctx.page)}">' for l in LANGS
     )
+    others = "\n".join(
+        f'<meta property="og:locale:alternate" content="{OG_LOCALES[l]}">' for l in LANGS if l != ctx.lang
+    )
+    og_alt = f"{t['site_name']} – {t['common']['tagline']}"
     return f"""<!doctype html>
 <html lang="{ctx.lang}">
 <head>
@@ -109,6 +118,7 @@ def head(ctx, title, description):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{e(full_title)}</title>
 <meta name="description" content="{e(description)}">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <link rel="canonical" href="{abs_url(ctx.lang, ctx.page)}">
 {alts}
 <link rel="alternate" hreflang="x-default" href="{abs_url('en', ctx.page)}">
@@ -116,15 +126,127 @@ def head(ctx, title, description):
 <meta property="og:site_name" content="{e(t['site_name'])}">
 <meta property="og:title" content="{e(full_title)}">
 <meta property="og:description" content="{e(description)}">
-<meta property="og:locale" content="{t['locale']}">
+<meta property="og:locale" content="{OG_LOCALES[ctx.lang]}">
+{others}
 <meta property="og:url" content="{abs_url(ctx.lang, ctx.page)}">
-<meta property="og:image" content="{BASE_URL}/assets/img/logo.png">
+<meta property="og:image" content="{OG_IMAGE}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{e(og_alt)}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{e(full_title)}">
+<meta name="twitter:description" content="{e(description)}">
+<meta name="twitter:image" content="{OG_IMAGE}">
 <meta name="theme-color" content="#fe26ac">
 <link rel="icon" href="{ctx.asset('img/favicon.svg')}" type="image/svg+xml">
 <link rel="icon" href="{ctx.asset('img/favicon.ico')}" sizes="48x48">
 <link rel="apple-touch-icon" href="{ctx.asset('img/apple-touch-icon.png')}">
+<link rel="preload" href="{ctx.asset('fonts/autography.woff')}" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="{ctx.asset('css/style.css')}">
-</head>"""
+{jsonld}</head>"""
+
+
+# ------------------------------------------------------- structured data ---
+
+def ld_script(*graph):
+    data = {"@context": "https://schema.org", "@graph": list(graph)}
+    # "</" is escaped so the JSON can never close the <script> tag early
+    return '<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
+
+
+def ld_business(ctx):
+    t, c = ctx.t, ctx.t["common"]
+    return {
+        "@type": ["Physiotherapy", "LocalBusiness"],
+        "@id": f"{BASE_URL}/#business",
+        "name": t["site_name"],
+        "url": abs_url(ctx.lang, "home"),
+        "description": t["home"]["description"],
+        "image": OG_IMAGE,
+        "logo": f"{BASE_URL}/assets/img/logo.png",
+        "telephone": PHONE_TEL,
+        "email": EMAIL,
+        "medicalSpecialty": "Physiotherapy",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Calle Agata Buzón 77",
+            "postalCode": "03170",
+            "addressLocality": "Rojales",
+            "addressRegion": "Alicante",
+            "addressCountry": "ES",
+        },
+        "areaServed": {"@type": "Place", "name": "Rojales, Costa Blanca"},
+        "openingHoursSpecification": [{
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "15:00",
+            "closes": "21:00",
+        }],
+        "availableLanguage": ["English", "Dutch", "Spanish"],
+        "sameAs": [FACEBOOK, INSTAGRAM],
+        "founder": {"@id": f"{BASE_URL}/#mellany"},
+        "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": t["services"]["title"],
+            "itemListElement": [
+                {"@type": "Offer", "itemOffered": {"@type": "Service", "name": it["title"], "description": it["short"]}}
+                for it in t["services"]["items"]
+            ],
+        },
+    }
+
+
+def ld_person(ctx):
+    a = ctx.t["about"]
+    return {
+        "@type": "Person",
+        "@id": f"{BASE_URL}/#mellany",
+        "name": "Mellany Ginny van Hoeven",
+        "jobTitle": a["mellany_role"],
+        "worksFor": {"@id": f"{BASE_URL}/#business"},
+        "knowsLanguage": ["en", "nl", "es"],
+        "alumniOf": {"@type": "CollegeOrUniversity", "name": "UCH CEU University, Elche"},
+        "image": f"{BASE_URL}/assets/img/mellany.jpg",
+    }
+
+
+def ld_breadcrumbs(ctx):
+    items = [("home", ctx.t["nav"]["home"])]
+    if ctx.page != "home":
+        items.append((ctx.page, ctx.t["nav"].get(ctx.page) or ctx.t[ctx.page]["title"]))
+    return {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": i, "name": n, "item": abs_url(ctx.lang, p)}
+            for i, (p, n) in enumerate(items, 1)
+        ],
+    }
+
+
+def structured_data(ctx):
+    """JSON-LD per page: business + site on home, person on about, FAQ on faq, breadcrumbs on inner pages."""
+    t, page = ctx.t, ctx.page
+    g = []
+    if page == "home":
+        g.append(ld_business(ctx))
+        g.append({"@type": "WebSite", "@id": f"{BASE_URL}/#website", "url": f"{BASE_URL}/", "name": t["site_name"],
+                  "inLanguage": ctx.lang, "publisher": {"@id": f"{BASE_URL}/#business"}})
+    else:
+        g.append(ld_breadcrumbs(ctx))
+        g.append({"@type": "WebPage", "@id": abs_url(ctx.lang, page) + "#webpage", "url": abs_url(ctx.lang, page),
+                  "name": t[page].get("seo_title") or t[page]["title"], "inLanguage": ctx.lang,
+                  "isPartOf": {"@id": f"{BASE_URL}/#website"}, "about": {"@id": f"{BASE_URL}/#business"}})
+    if page == "about":
+        g.append(ld_person(ctx))
+        g.append(ld_business(ctx))
+    if page == "contact":
+        g.append(ld_business(ctx))
+    if page == "faq":
+        g.append({"@type": "FAQPage", "mainEntity": [
+            {"@type": "Question", "name": i["q"], "acceptedAnswer": {"@type": "Answer", "text": i["a"]}}
+            for i in t["faq"]["items"]
+        ]})
+    return ld_script(*g)
 
 
 def cur(cond, val):
@@ -224,7 +346,7 @@ def cta_band(ctx, title, text, label):
 def testimonials(ctx):
     cards = "".join(
         f"""<figure class="quote">
-  <blockquote><p>{e(q['quote'])}</p></blockquote>
+  <blockquote><p{'' if q.get('lang', ctx.lang) == ctx.lang else f' lang="{q["lang"]}"'}>{e(q['quote'])}</p></blockquote>
   <figcaption><strong>{e(q['name'])}</strong><span>{e(q['label'])}</span></figcaption>
 </figure>"""
         for q in ctx.t["testimonials"]
@@ -491,6 +613,14 @@ def page_privacy(ctx):
 BUILDERS = {"home": page_home, "about": page_about, "services": page_services, "faq": page_faq, "contact": page_contact, "privacy": page_privacy}
 
 
+def check_seo(lang, page, title, desc):
+    """Warn (not fail) when a title or description will be truncated or is too thin in search results."""
+    if len(title) > 65:
+        print(f"warning: {lang}/{page} <title> is {len(title)} chars (aim for <= 60)")
+    if not 70 <= len(desc) <= 165:
+        print(f"warning: {lang}/{page} meta description is {len(desc)} chars (aim for 70-160)")
+
+
 def write(path, text):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(text, encoding="utf-8")
@@ -511,15 +641,19 @@ def main():
         for page in PAGES:
             ctx = Ctx(lang, page, t)
             title, desc, body = BUILDERS[page](ctx)
-            write(SITE / lang / PATHS[page] / "index.html", head(ctx, title, desc) + header(ctx) + body + footer(ctx))
+            check_seo(lang, page, ctx.t[page].get("seo_title") or title, desc)
+            write(SITE / lang / PATHS[page] / "index.html", head(ctx, title, desc, structured_data(ctx)) + header(ctx) + body + footer(ctx))
 
     # Root: pick a language from the browser, English is the fallback.
+    root_alts = "\n".join(f'<link rel="alternate" hreflang="{l}" href="{abs_url(l, "home")}">' for l in LANGS)
     write(SITE / "index.html", f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PhysioFit365</title>
+<title>{e(translations["en"]["home"]["seo_title"])}</title>
+<meta name="description" content="{e(translations["en"]["home"]["description"])}">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="assets/img/favicon.ico" sizes="48x48">
 <link rel="canonical" href="{BASE_URL}/en/">
+{root_alts}
 <link rel="alternate" hreflang="x-default" href="{BASE_URL}/en/">
 <noscript><meta http-equiv="refresh" content="0; url=en/"></noscript>
 <script>
@@ -530,6 +664,21 @@ def main():
 </script></head>
 <body><p><a href="en/">English</a> · <a href="nl/">Nederlands</a> · <a href="es/">Español</a></p></body></html>
 """)
+
+    # 404 page (GitHub Pages serves site/404.html). Absolute asset paths because it is served from any URL; kept out of the index.
+    write(SITE / "404.html", f"""<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found | PhysioFit365</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="{BASE_PATH}/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="{BASE_PATH}/assets/css/style.css">
+</head><body>
+<main id="main"><section class="page-head"><div class="wrap">
+<h1>404</h1>
+<p class="lead">Page not found · Página no encontrada · Pagina niet gevonden</p>
+<p><a class="btn" href="{BASE_PATH}/en/">English</a> <a class="btn btn-ghost" href="{BASE_PATH}/nl/">Nederlands</a> <a class="btn btn-ghost" href="{BASE_PATH}/es/">Español</a></p>
+</div></section></main></body></html>
+""")
     urls = "".join(
         f"<url><loc>{abs_url(l, p)}</loc>" + "".join(
             f'<xhtml:link rel="alternate" hreflang="{x}" href="{abs_url(x, p)}"/>' for x in LANGS
@@ -537,7 +686,7 @@ def main():
         for l in LANGS for p in PAGES
     )
     write(SITE / "sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n{urls}</urlset>\n')
-    write(SITE / "robots.txt", f"User-agent: *\nAllow: /\nSitemap: {BASE_URL}/sitemap.xml\n")
+    write(SITE / "robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {BASE_URL}/sitemap.xml\n")
     print(f"Built {len(LANGS) * len(PAGES)} pages in {SITE}")
 
 

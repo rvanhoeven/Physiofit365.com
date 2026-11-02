@@ -28,11 +28,13 @@
     "rights": "Alle rechten voorbehouden.",
     "more": "Meer informatie",
     "skip": "Naar de inhoud",
-    "back_top": "Terug naar boven"
+    "back_top": "Terug naar boven",
+    "photo_alt": "Mellany van Hoeven, fysiotherapeut en verpleegkundige, behandelt patiënten aan huis in Rojales"
   },
   "home": {
     "title": "Fysiotherapie aan huis aan de Costa Blanca",
-    "description": "PhysioFit365: manuele therapie, revalidatie na werk- en sportblessures en zorg voor ouderen, bij u thuis in en rond Rojales. Door Mellany van Hoeven, fysiotherapeut en verpleegkundige.",
+    "seo_title": "Fysiotherapie aan huis Rojales & Costa Blanca | PhysioFit365",
+    "description": "Fysiotherapie aan huis in en rond Rojales, Costa Blanca: manuele therapie, werk- en sportblessures, ouderenzorg. Door Mellany van Hoeven, fysiotherapeut.",
     "eyebrow": "Fysiotherapie & revalidatie · Rojales",
     "hero_title": "Herstel in uw eigen vertrouwde omgeving",
     "hero_sub": "Persoonlijke fysiotherapie door Mellany van Hoeven, fysiotherapeut en verpleegkundige. Zij komt naar u toe in en rond Rojales en neemt echt de tijd voor u.",
@@ -87,6 +89,7 @@
   },
   "services": {
     "title": "Behandelingen",
+    "seo_title": "Fysiotherapie behandelingen aan huis, Rojales | PhysioFit365",
     "description": "Manuele therapie, werkblessures en sportblessures: fysiotherapie aan huis aan de Costa Blanca door PhysioFit365.",
     "intro": "Elke behandeling begint met een grondig onderzoek en eindigt met een plan dat u zelf kunt volgen, zodat u actief meewerkt aan uw herstel.",
     "items": [
@@ -148,6 +151,7 @@
   },
   "about": {
     "title": "Over PhysioFit365",
+    "seo_title": "Mellany van Hoeven, fysiotherapeut in Rojales | PhysioFit365",
     "description": "Maak kennis met Mellany Ginny van Hoeven, fysiotherapeut en verpleegkundige, en lees hoe PhysioFit365 werkt.",
     "intro": "PhysioFit365 biedt fysiotherapie aan huis aan de Costa Blanca, met de combinatie van traditionele fysiotherapie en moderne manuele therapie.",
     "philosophy_title": "Onze visie op behandelen",
@@ -180,6 +184,7 @@
   },
   "faq": {
     "title": "Veelgestelde vragen",
+    "seo_title": "Veelgestelde vragen fysiotherapie aan huis | PhysioFit365",
     "description": "Antwoorden op veelgestelde vragen over fysiotherapie en behandeling aan huis door PhysioFit365.",
     "items": [
       {
@@ -210,6 +215,7 @@
   },
   "contact": {
     "title": "Contact",
+    "seo_title": "Contact en afspraak aan huis in Rojales | PhysioFit365",
     "description": "Neem contact op met PhysioFit365 in Rojales: stel een vraag of vraag een bezoek aan huis aan, telefonisch of per e-mail.",
     "intro": "Stel uw vraag telefonisch of stuur ons een bericht via het formulier hieronder. Uw bericht gaat rechtstreeks naar ons team en wij antwoorden zo snel mogelijk.",
     "details_title": "Onze gegevens",
@@ -245,6 +251,7 @@
   },
   "privacy": {
     "title": "Privacybeleid",
+    "seo_title": "Privacybeleid | PhysioFit365",
     "description": "Hoe PhysioFit365 omgaat met de persoonsgegevens die u via deze website verstuurt.",
     "draft": "Deze tekst is een concept en moet voor publicatie worden gecontroleerd.",
     "sections": [
@@ -282,22 +289,26 @@
     {
       "quote": "Sufrí una fractura en el codo y me ayudó a recuperarme perfectamente gracias a sus sesiones de masaje y a sus recomendaciones y sugerencias de ejercicios para realizar diariamente.",
       "name": "Irene Zamora Meseguer",
-      "label": "Behandeling elleboog"
+      "label": "Behandeling elleboog",
+      "lang": "es"
     },
     {
       "quote": "My physical therapist was fantastic! The care I received was impeccable. Great service!",
       "name": "Christopher Strock",
-      "label": "Behandeling rugpijn"
+      "label": "Behandeling rugpijn",
+      "lang": "en"
     },
     {
       "quote": "The physical therapist who treated me was wonderful, very professional, caring and prompt.",
       "name": "John White",
-      "label": "Behandeling werkblessure"
+      "label": "Behandeling werkblessure",
+      "lang": "en"
     },
     {
       "quote": "I had a really positive experience and my shoulder is totally functional again, without pain! I really enjoyed my therapist.",
       "name": "Kimberly Rogers",
-      "label": "Behandeling sportblessure"
+      "label": "Behandeling sportblessure",
+      "lang": "en"
     }
   ],
   "insurers": [
