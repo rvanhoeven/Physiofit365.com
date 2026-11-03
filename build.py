@@ -11,6 +11,7 @@ import json
 import os
 import re
 import shutil
+from urllib.parse import quote
 from html import escape as e
 from pathlib import Path
 
@@ -41,9 +42,12 @@ ICONS = {
     "phone": '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>',
     "mail": '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>',
     "pin": '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>',
+    "surgery": '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/></svg>',
+    "elderly": '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-8-4.7-8-10.5A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 8 2.5C20 15.300 12 20 12 20z"/></svg>',
     "clock": '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
 }
 ADV_ICONS = ["user", "home", "badge", "team", "star", "target"]
+BENEFIT_ICONS = ["pin", "home", "user", "team"]
 
 
 def load(lang):
@@ -82,6 +86,10 @@ class Ctx:
         """Contact page, scrolled to the form."""
         return self.url("contact") + "#form"
 
+    def form_url_about(self, subject):
+        """Contact form with the subject field already filled in (see site.js)."""
+        return self.url("contact") + "?subject=" + quote(subject) + "#form"
+
     def asset(self, p):
         return f"{self.up}assets/{p}"
 
@@ -98,6 +106,55 @@ def photo(ctx, mode="lazy"):
 
 def abs_url(lang, page):
     return f"{BASE_URL}/{lang}/{PATHS[page]}"
+
+
+def json_ld(data):
+    text = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
+    return f'<script type="application/ld+json">{text}</script>'
+
+
+def structured_data(ctx):
+    """Search engine data: the business on home pages, the questions on FAQ pages."""
+    t = ctx.t
+    if ctx.page == "home":
+        return json_ld({
+            "@context": "https://schema.org",
+            "@type": "Physiotherapy",
+            "name": t["site_name"],
+            "description": t["home"]["description"],
+            "url": abs_url(ctx.lang, "home"),
+            "image": f"{BASE_URL}/assets/img/mellany.jpg",
+            "logo": f"{BASE_URL}/assets/img/logo.png",
+            "telephone": PHONE_TEL,
+            "email": EMAIL,
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Calle Agata Buzón 77",
+                "postalCode": "03170",
+                "addressLocality": "Rojales",
+                "addressRegion": "Alicante",
+                "addressCountry": "ES",
+            },
+            "areaServed": [{"@type": "Place", "name": n} for n in t["home"]["area_towns"]],
+            "openingHoursSpecification": {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                "opens": "15:00",
+                "closes": "21:00",
+            },
+            "availableLanguage": ["en", "nl", "es"],
+            "sameAs": [FACEBOOK, INSTAGRAM],
+        })
+    if ctx.page == "faq":
+        return json_ld({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {"@type": "Question", "name": i["q"], "acceptedAnswer": {"@type": "Answer", "text": i["a"]}}
+                for i in t["faq"]["items"]
+            ],
+        })
+    return ""
 
 
 def head(ctx, title, description):
@@ -128,6 +185,7 @@ def head(ctx, title, description):
 <link rel="icon" href="{ctx.asset('img/favicon.ico')}" sizes="48x48">
 <link rel="apple-touch-icon" href="{ctx.asset('img/apple-touch-icon.png')}">
 <link rel="stylesheet" href="{ctx.asset('css/style.css')}">
+{structured_data(ctx)}
 </head>"""
 
 
@@ -261,6 +319,15 @@ def page_home(ctx):
         f"""<li>{ico(ADV_ICONS[i])}<div><h3>{e(a['title'])}</h3><p>{e(a['text'])}</p></div></li>"""
         for i, a in enumerate(h["advantages"])
     )
+    benefits = "".join(
+        f"""<article class="card">{ico(BENEFIT_ICONS[i])}<h3>{e(b['title'])}</h3><p>{e(b['text'])}</p></article>"""
+        for i, b in enumerate(h["benefits"])
+    )
+    zones = "".join(
+        f"""<li><a href="{e(ctx.form_url_about(z['zone']))}"><strong>{e(z['zone'])}</strong><span>{e(z['examples'])}</span></a></li>"""
+        for z in h["zones"]
+    )
+    towns = "".join(f"<li>{e(n)}</li>" for n in h["area_towns"])
     insurers = "".join(
         f'<li><a href="{e(i["url"])}" rel="noopener">{e(i["name"])}</a></li>' for i in load("en")["insurers"]
     )
@@ -288,7 +355,24 @@ def page_home(ctx):
   <div class="wrap">
     <h2 class="section-title">{e(h['services_title'])}</h2>
     <p class="section-sub">{e(h['services_sub'])}</p>
-    <div class="cards">{svc_cards}</div>
+    <div class="cards five">{svc_cards}</div>
+  </div>
+</section>
+
+<section class="section tint">
+  <div class="wrap">
+    <h2 class="section-title">{e(h['benefits_title'])}</h2>
+    <p class="section-sub">{e(h['benefits_sub'])}</p>
+    <div class="cards four">{benefits}</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2 class="section-title">{e(h['zones_title'])}</h2>
+    <p class="section-sub">{e(h['zones_sub'])}</p>
+    <ul class="zones">{zones}</ul>
+    <p class="zones-note">{e(h['zones_note'])}</p>
   </div>
 </section>
 
@@ -327,6 +411,9 @@ def page_home(ctx):
     <div>
       <h2>{e(h['area_title'])}</h2>
       <p>{e(h['area_text'])}</p>
+      <p class="towns-label">{e(h['area_towns_label'])}</p>
+      <ul class="towns">{towns}</ul>
+      <p class="muted">{e(t['common']['no_practice'])}</p>
     </div>
     <div>
       <h2>{e(h['insurers_title'])}</h2>
@@ -438,7 +525,7 @@ def page_contact(ctx):
         <li>{ico('phone')}<span><strong>{e(com['phone_label'])}</strong><br><a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a></span></li>
         <li>{ico('mail')}<span><strong>{e(com['email_label'])}</strong><br><a href="mailto:{EMAIL}">{EMAIL}</a></span></li>
         <li>{ico('clock')}<span><strong>{e(com['hours_label'])}</strong><br>{e(com['hours'])}<br>{e(com['closed'])}</span></li>
-        <li>{ico('home')}<span>{e(com['area'])}</span></li>
+        <li>{ico('home')}<span>{e(com['area'])}<br>{e(com['no_practice'])}</span></li>
       </ul>
     </aside>
     <div class="form-card" id="form">

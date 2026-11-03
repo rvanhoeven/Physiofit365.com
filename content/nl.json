@@ -28,7 +28,8 @@
     "rights": "Alle rechten voorbehouden.",
     "more": "Meer informatie",
     "skip": "Naar de inhoud",
-    "back_top": "Terug naar boven"
+    "back_top": "Terug naar boven",
+    "no_practice": "Wij behandelen uitsluitend aan huis. Er is geen praktijk om langs te komen."
   },
   "home": {
     "title": "Fysiotherapie aan huis aan de Costa Blanca",
@@ -39,7 +40,7 @@
     "cta_primary": "Stel een vraag",
     "cta_secondary": "Bekijk de behandelingen",
     "badges": [
-      "Gediplomeerd fysiotherapeut",
+      "Gediplomeerd fysiotherapeut, nr. 6048",
       "Geregistreerd verpleegkundige",
       "English · Nederlands · Español"
     ],
@@ -56,8 +57,8 @@
         "text": "Wij behandelen u waar u zich het prettigst voelt: thuis."
       },
       {
-        "title": "Gediplomeerde therapeut",
-        "text": "Uw behandeling wordt uitgevoerd door een gediplomeerd fysiotherapeut."
+        "title": "Fysiotherapeut én verpleegkundige",
+        "text": "Eén vaste behandelaar met twee opleidingen, die verder kijkt dan alleen spieren en gewrichten."
       },
       {
         "title": "Samenwerking met uw artsen",
@@ -82,8 +83,73 @@
     "area_text": "Wij komen bij u thuis in en rond Rojales. Weet u niet zeker of wij naar uw adres komen? Stuur ons uw woonplaats en wij laten het u weten.",
     "insurers_title": "Aanbevolen zorgverzekeraars",
     "final_title": "Een vraag over uw klacht?",
-    "final_text": "Stuur ons een kort bericht. Wij reageren telefonisch of per e-mail, wat u het prettigst vindt.",
-    "final_cta": "Neem contact op"
+    "final_text": "Stuur ons een kort bericht, geheel vrijblijvend. Wij reageren telefonisch of per e-mail, wat u het prettigst vindt.",
+    "final_cta": "Neem contact op",
+    "benefits_title": "Waarom behandelen aan huis werkt",
+    "benefits_sub": "U hoeft nergens heen. En wij zien meteen hoe u thuis beweegt.",
+    "benefits": [
+      {
+        "title": "Geen reis, geen wachtkamer",
+        "text": "Geen rit met pijn, geen parkeerplaats zoeken. Wij komen naar u toe."
+      },
+      {
+        "title": "Oefenen in uw eigen huis",
+        "text": "Uw trap, uw stoel, uw bed: de oefeningen sluiten aan op wat u thuis echt doet."
+      },
+      {
+        "title": "Eén op één",
+        "text": "Tijdens het bezoek bent u de enige patiënt en u ziet steeds dezelfde behandelaar."
+      },
+      {
+        "title": "Uw naaste mag erbij zijn",
+        "text": "Partner of mantelzorger kan meeluisteren en leren hoe zij u het best helpen."
+      }
+    ],
+    "zones_title": "Waar heeft u last van?",
+    "zones_sub": "Kies de plek en stel direct uw vraag. Uw keuze staat alvast in het formulier.",
+    "zones_note": "Deze lijst is geen diagnose. Bij een ongeval, hevige of plotselinge klachten: neem contact op met uw huisarts of bel 112.",
+    "zones": [
+      {
+        "zone": "Nek",
+        "examples": "Stijve nek, pijn na lang zitten"
+      },
+      {
+        "zone": "Schouder",
+        "examples": "Pijn bij heffen, minder beweging"
+      },
+      {
+        "zone": "Elleboog en pols",
+        "examples": "Overbelasting, herstel na een breuk"
+      },
+      {
+        "zone": "Bovenrug",
+        "examples": "Spanning, houdingsklachten"
+      },
+      {
+        "zone": "Onderrug",
+        "examples": "Lage rugpijn, stijfheid"
+      },
+      {
+        "zone": "Heup",
+        "examples": "Pijn bij lopen, herstel na een operatie"
+      },
+      {
+        "zone": "Knie",
+        "examples": "Pijn op de trap, herstel na een operatie"
+      },
+      {
+        "zone": "Enkel en voet",
+        "examples": "Verstuiking, overbelasting"
+      }
+    ],
+    "area_towns_label": "Onder andere in:",
+    "area_towns": [
+      "Rojales",
+      "Ciudad Quesada",
+      "Formentera del Segura",
+      "Benijófar",
+      "Algorfa"
+    ]
   },
   "services": {
     "title": "Behandelingen",
@@ -125,9 +191,33 @@
           "Blessurepreventie",
           "Persoonlijke zorg"
         ]
+      },
+      {
+        "id": "surgery",
+        "title": "Revalidatie na een operatie",
+        "short": "Na uw ingreep veilig weer op gang komen, thuis.",
+        "body": "Juist na een operatie is de weg naar een praktijk vaak lastig. Wij starten bij u thuis, stemmen de opbouw af op het advies van uw arts en werken stap voor stap aan kracht, beweeglijkheid en zelfstandigheid. Als ook verpleegkundige let Mellany op uw hele herstel, niet alleen op de geopereerde plek.",
+        "points": [
+          "Opbouw volgens advies van uw arts",
+          "Beweeglijkheid en kracht",
+          "Dagelijkse handelingen weer oppakken",
+          "Oefenplan voor tussen de bezoeken"
+        ]
+      },
+      {
+        "id": "elderly",
+        "title": "Zorg voor ouderen",
+        "short": "Sterk en zelfstandig blijven in uw eigen huis.",
+        "body": "Wij helpen ouderen om in beweging te blijven en met vertrouwen hun dagelijkse dingen te blijven doen. Omdat wij bij u thuis komen, oefenen we precies daar waar het telt: opstaan uit uw stoel, de trap, de weg door het huis. Familie of mantelzorgers zijn welkom om mee te kijken.",
+        "points": [
+          "Kracht en evenwicht",
+          "Veilig bewegen in huis",
+          "Pijnvermindering",
+          "Uitleg voor familie of mantelzorgers"
+        ]
       }
     ],
-    "how_title": "Zo verloopt een bezoek",
+    "how_title": "Zo verloopt uw herstel",
     "how": [
       {
         "title": "U neemt contact op",
@@ -138,8 +228,16 @@
         "text": "Wij komen langs, luisteren goed en onderzoeken uw klacht. Een sessie duurt meestal 45 tot 60 minuten."
       },
       {
-        "title": "Behandeling en plan",
-        "text": "U krijgt een behandeling met de handen en een duidelijk plan met oefeningen die u zelf kunt doen."
+        "title": "Samen doelen stellen",
+        "text": "Wat wilt u weer kunnen? Op basis daarvan maken we samen een duidelijk plan."
+      },
+      {
+        "title": "Behandelen en bijsturen",
+        "text": "U krijgt behandeling met de handen en oefeningen. Onderweg kijken we of u vooruitgaat en passen we het plan zo nodig aan."
+      },
+      {
+        "title": "Afronden en zelf verder",
+        "text": "Aan het einde bekijken we samen het resultaat en krijgt u een persoonlijk oefenprogramma voor thuis."
       }
     ],
     "cta_title": "Weet u niet welke behandeling past?",
@@ -166,7 +264,7 @@
     "education_title": "Opleiding",
     "education": "Mellany studeerde in 2017 af als fysiotherapeut aan de UCH CEU Universiteit in Elche (Spanje). Drie jaar later studeerde zij ook af als volledig geregistreerd verpleegkundige. Haar bijzondere interesse gaat uit naar manuele therapie en sportrevalidatie.",
     "registration_title": "Beroepsregistratie",
-    "registration": "Illustere Officiële Orde van Fysiotherapeuten van de Valenciaanse Gemeenschap (Colegio Oficial de Fisioterapeutas de la Comunidad Valenciana), nummer 6048.",
+    "registration": "Illustere Officiële Orde van Fysiotherapeuten van de Valenciaanse Gemeenschap (Colegio Oficial de Fisioterapeutas de la Comunidad Valenciana), nummer 6048. Daarnaast is Mellany ingeschreven bij de beroepsorde van verpleegkundigen.",
     "career_title": "Loopbaan",
     "career": "Tijdens haar zeven jaar aan de universiteit werkte Mellany als fysiotherapeut in diverse openbare en particuliere ziekenhuizen, en daarnaast bij particuliere praktijken, instituten en revalidatiecentra van de overheid.",
     "quals_title": "Kwalificaties",
@@ -201,6 +299,26 @@
       {
         "q": "Met welke klachten kan ik terecht?",
         "a": "Veelvoorkomend zijn pijn, herstel na een operatie, spierversterking, werkblessures en sportblessures. Twijfelt u? Stuur ons een bericht en wij adviseren u."
+      },
+      {
+        "q": "Wat kost een behandeling?",
+        "a": "Stuur ons een bericht of bel, dan hoort u de prijs vooraf, nog voordat er een afspraak staat. Een vraag stellen kost niets."
+      },
+      {
+        "q": "Vergoedt mijn verzekering de behandeling?",
+        "a": "Dat hangt af van uw polis. Vraag bij uw verzekeraar na of en hoe fysiotherapie aan huis wordt vergoed, het liefst vóór de eerste afspraak."
+      },
+      {
+        "q": "Heb ik een verwijzing van een arts nodig?",
+        "a": "Voor particuliere fysiotherapie meestal niet. Uw verzekeraar kan wel een voorschrift eisen, dus controleer dat als u vergoeding wilt aanvragen."
+      },
+      {
+        "q": "Wat moet ik klaarleggen voor het eerste bezoek?",
+        "a": "Medische verslagen of scans als u die heeft, een overzicht van uw medicijnen en makkelijke kleding. Een rustig plekje in huis is genoeg om te beginnen."
+      },
+      {
+        "q": "Hoeveel behandelingen heb ik nodig?",
+        "a": "Dat verschilt per klacht en per persoon. Na het eerste onderzoek bespreken we wat u mag verwachten."
       },
       {
         "q": "Hoe kom ik in contact?",

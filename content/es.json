@@ -28,7 +28,8 @@
     "rights": "Todos los derechos reservados.",
     "more": "Más información",
     "skip": "Saltar al contenido",
-    "back_top": "Volver arriba"
+    "back_top": "Volver arriba",
+    "no_practice": "Tratamos solo a domicilio. No hay consulta que visitar."
   },
   "home": {
     "title": "Fisioterapia a domicilio en la Costa Blanca",
@@ -39,7 +40,7 @@
     "cta_primary": "Haz una consulta",
     "cta_secondary": "Ver tratamientos",
     "badges": [
-      "Fisioterapeuta colegiada",
+      "Fisioterapeuta colegiada n.º 6048",
       "Enfermera colegiada",
       "English · Nederlands · Español"
     ],
@@ -56,8 +57,8 @@
         "text": "Te tratamos donde mejor te sientes: en tu propia casa."
       },
       {
-        "title": "Fisioterapeuta colegiada",
-        "text": "Tu tratamiento lo realiza una fisioterapeuta colegiada."
+        "title": "Fisioterapeuta y enfermera",
+        "text": "Una única profesional con dos titulaciones, que mira más allá de los músculos y las articulaciones."
       },
       {
         "title": "Coordinación con tus médicos",
@@ -82,8 +83,73 @@
     "area_text": "Vamos a tu domicilio en Rojales y alrededores. ¿No sabes si llegamos a tu dirección? Envíanos tu localidad y te lo decimos.",
     "insurers_title": "Aseguradoras de salud recomendadas",
     "final_title": "¿Tienes una duda sobre tu dolencia?",
-    "final_text": "Envíanos un breve mensaje. Te responderemos por teléfono o por correo electrónico, como prefieras.",
-    "final_cta": "Contacta con nosotros"
+    "final_text": "Envíanos un mensaje breve, sin compromiso. Te responderemos por teléfono o por correo, como prefieras.",
+    "final_cta": "Contacta con nosotros",
+    "benefits_title": "Por qué funciona el tratamiento a domicilio",
+    "benefits_sub": "No tienes que ir a ningún sitio. Y vemos enseguida cómo te mueves en casa.",
+    "benefits": [
+      {
+        "title": "Sin desplazamientos ni sala de espera",
+        "text": "Sin viajes con dolor y sin buscar aparcamiento. Vamos nosotros a verte."
+      },
+      {
+        "title": "Ejercicios en tu propia casa",
+        "text": "Tu escalera, tu silla, tu cama: los ejercicios se adaptan a lo que de verdad haces en casa."
+      },
+      {
+        "title": "Atención individual",
+        "text": "Durante la visita eres el único paciente y siempre te atiende la misma profesional."
+      },
+      {
+        "title": "Tu familiar puede estar presente",
+        "text": "Tu pareja o cuidador puede escuchar y aprender cómo ayudarte mejor."
+      }
+    ],
+    "zones_title": "¿Dónde te duele?",
+    "zones_sub": "Elige la zona y haz tu consulta directamente. Tu elección ya aparece en el formulario.",
+    "zones_note": "Esta lista no es un diagnóstico. Tras un accidente, o con síntomas intensos o repentinos, contacta con tu médico o llama al 112.",
+    "zones": [
+      {
+        "zone": "Cuello",
+        "examples": "Rigidez, dolor tras estar mucho sentado"
+      },
+      {
+        "zone": "Hombro",
+        "examples": "Dolor al levantar el brazo, menos movilidad"
+      },
+      {
+        "zone": "Codo y muñeca",
+        "examples": "Sobrecarga, recuperación tras una fractura"
+      },
+      {
+        "zone": "Espalda alta",
+        "examples": "Tensión, molestias posturales"
+      },
+      {
+        "zone": "Zona lumbar",
+        "examples": "Dolor lumbar, rigidez"
+      },
+      {
+        "zone": "Cadera",
+        "examples": "Dolor al caminar, recuperación tras una operación"
+      },
+      {
+        "zone": "Rodilla",
+        "examples": "Dolor en las escaleras, recuperación tras una operación"
+      },
+      {
+        "zone": "Tobillo y pie",
+        "examples": "Esguinces, sobrecarga"
+      }
+    ],
+    "area_towns_label": "Entre otros:",
+    "area_towns": [
+      "Rojales",
+      "Ciudad Quesada",
+      "Formentera del Segura",
+      "Benijófar",
+      "Algorfa"
+    ]
   },
   "services": {
     "title": "Tratamientos",
@@ -125,9 +191,33 @@
           "Prevención de lesiones",
           "Atención personalizada"
         ]
+      },
+      {
+        "id": "surgery",
+        "title": "Rehabilitación tras una operación",
+        "short": "Volver a moverte con seguridad después de la intervención, en casa.",
+        "body": "Justo después de una operación, ir a una clínica suele ser difícil. Empezamos en tu domicilio, adaptamos la progresión a las indicaciones de tu médico y trabajamos paso a paso la fuerza, la movilidad y la autonomía. Como también es enfermera, Mellany atiende a toda tu recuperación, no solo a la zona operada.",
+        "points": [
+          "Progresión según las indicaciones de tu médico",
+          "Movilidad y fuerza",
+          "Recuperar las tareas diarias",
+          "Plan de ejercicios entre visitas"
+        ]
+      },
+      {
+        "id": "elderly",
+        "title": "Atención a personas mayores",
+        "short": "Mantenerte fuerte y autónomo en tu propia casa.",
+        "body": "Ayudamos a las personas mayores a seguir en movimiento y a realizar sus actividades diarias con confianza. Como vamos a tu casa, practicamos justo donde importa: levantarte de la silla, las escaleras, moverte por la casa. Familiares y cuidadores pueden estar presentes.",
+        "points": [
+          "Fuerza y equilibrio",
+          "Moverte con seguridad en casa",
+          "Alivio del dolor",
+          "Orientación para familiares o cuidadores"
+        ]
       }
     ],
-    "how_title": "Cómo es una visita",
+    "how_title": "Cómo es tu recuperación",
     "how": [
       {
         "title": "Te pones en contacto",
@@ -138,8 +228,16 @@
         "text": "Vamos a verte, te escuchamos con atención y valoramos tu dolencia. Una sesión suele durar entre 45 y 60 minutos."
       },
       {
-        "title": "Tratamiento y plan",
-        "text": "Recibes un tratamiento manual y un plan claro con ejercicios que puedes hacer tú mismo."
+        "title": "Fijamos objetivos juntos",
+        "text": "¿Qué quieres volver a poder hacer? A partir de ahí, preparamos juntos un plan claro."
+      },
+      {
+        "title": "Tratamiento y ajustes",
+        "text": "Recibes tratamiento manual y ejercicios. Durante el proceso comprobamos cómo avanzas y ajustamos el plan si hace falta."
+      },
+      {
+        "title": "Cierre y a seguir por tu cuenta",
+        "text": "Al final revisamos juntos el resultado y recibes un programa personal de ejercicios para casa."
       }
     ],
     "cta_title": "¿No sabes qué tratamiento te conviene?",
@@ -166,7 +264,7 @@
     "education_title": "Formación",
     "education": "Mellany se graduó como fisioterapeuta en la Universidad CEU Cardenal Herrera (UCH CEU) de Elche en 2017. Tres años después se graduó también como enfermera colegiada. Le interesa especialmente la terapia manual y la rehabilitación deportiva.",
     "registration_title": "Colegiación profesional",
-    "registration": "Ilustre Colegio Oficial de Fisioterapeutas de la Comunidad Valenciana, n.º 6048.",
+    "registration": "Ilustre Colegio Oficial de Fisioterapeutas de la Comunidad Valenciana, n.º 6048. Mellany también está colegiada como enfermera.",
     "career_title": "Trayectoria",
     "career": "Durante sus siete años de universidad, Mellany trabajó como fisioterapeuta en diversos hospitales públicos y privados, así como en consultas privadas, institutos y centros de rehabilitación públicos.",
     "quals_title": "Titulaciones",
@@ -201,6 +299,26 @@
       {
         "q": "¿Qué dolencias podéis tratar?",
         "a": "Motivos habituales son el dolor, la recuperación tras una operación, el fortalecimiento muscular, las lesiones laborales y las deportivas. ¿Dudas? Envíanos un mensaje y te aconsejamos."
+      },
+      {
+        "q": "¿Cuánto cuesta un tratamiento?",
+        "a": "Envíanos un mensaje o llámanos y sabrás el precio por adelantado, antes de concertar ninguna cita. Preguntar no cuesta nada."
+      },
+      {
+        "q": "¿Lo cubre mi seguro?",
+        "a": "Depende de tu póliza. Pregunta a tu aseguradora si cubre la fisioterapia a domicilio y cómo, mejor antes de la primera cita."
+      },
+      {
+        "q": "¿Necesito un volante del médico?",
+        "a": "Para la fisioterapia privada, normalmente no. Tu aseguradora puede exigir una prescripción, así que compruébalo si quieres solicitar el reembolso."
+      },
+      {
+        "q": "¿Qué debo tener preparado para la primera visita?",
+        "a": "Informes médicos o pruebas si los tienes, una lista de tu medicación y ropa cómoda. Para empezar basta con un rincón tranquilo de la casa."
+      },
+      {
+        "q": "¿Cuántas sesiones necesitaré?",
+        "a": "Depende de la dolencia y de cada persona. Tras la primera valoración hablamos de lo que puedes esperar."
       },
       {
         "q": "¿Cómo me pongo en contacto?",

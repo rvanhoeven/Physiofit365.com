@@ -233,3 +233,27 @@ input:focus, select:focus, textarea:focus { outline: 3px solid var(--pink); outl
 /* contact button in the header jumps to the form */
 .form-card { scroll-margin-top: 110px; }
 .nav .btn[aria-current="page"] { box-shadow: 0 0 0 3px #fff, 0 0 0 5px var(--ink); }
+
+/* five treatments: 3 + 2 centred on wide screens */
+@media (min-width: 981px) {
+  .cards.five { grid-template-columns: repeat(6, 1fr); }
+  .cards.five > * { grid-column: span 2; }
+  .cards.five > :nth-child(4) { grid-column: 2 / span 2; }
+}
+
+/* "where does it hurt" list */
+.zones { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.zones a { display: flex; flex-direction: column; gap: 4px; height: 100%; padding: 18px 20px; border: 1.5px solid var(--line); border-radius: 16px; color: var(--ink); text-decoration: none; transition: border-color .15s, background .15s; }
+.zones a:hover { border-color: var(--pink); background: var(--blush); color: var(--ink); }
+.zones strong { font-size: 1.08rem; }
+.zones span { color: var(--muted); font-size: .94rem; line-height: 1.4; }
+.zones-note { text-align: center; color: var(--muted); font-size: .94rem; margin: 22px auto 0; max-width: 70ch; }
+
+/* towns */
+.towns-label { font-weight: 700; margin-bottom: 8px; }
+.towns { list-style: none; padding: 0; margin: 0 0 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+.towns li { padding: 5px 13px; background: var(--blush); border-radius: 999px; font-size: .94rem; font-weight: 600; }
+.muted { color: var(--muted); }
+
+@media (max-width: 980px) { .zones { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 420px) { .zones { grid-template-columns: 1fr; } }

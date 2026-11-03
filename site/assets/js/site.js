@@ -20,6 +20,12 @@
     setTimeout(function () { try { form.elements.name.focus({ preventScroll: true }); } catch (e) {} }, 350);
   }
 
+  // Arriving from the "where does it hurt" list: fill in the subject
+  try {
+    var subject = new URLSearchParams(location.search).get("subject");
+    if (subject && form.elements.subject) form.elements.subject.value = subject.slice(0, 200);
+  } catch (e) {}
+
   var msgs = {};
   try { msgs = JSON.parse(form.getAttribute("data-messages") || "{}"); } catch (e) {}
   var status = form.querySelector(".status");
