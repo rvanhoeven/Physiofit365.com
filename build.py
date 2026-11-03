@@ -693,7 +693,7 @@ def page_privacy(ctx):
     secs = "".join(f"<h2>{e(s['h'])}</h2><p>{e(s['p'])}</p>" for s in p["sections"])
     body = f"""
 <section class="page-head"><div class="wrap"><h1>{e(p['title'])}</h1></div></section>
-<section class="section"><div class="wrap narrow prose"><p class="note">{e(p['draft'])}</p>{secs}</div></section>
+<section class="section"><div class="wrap narrow prose">{secs}</div></section>
 """
     return p["title"], p["description"], body
 
