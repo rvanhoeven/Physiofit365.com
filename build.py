@@ -297,6 +297,12 @@ def cta_band(ctx, title, text, label):
 """
 
 
+def head_photo(ctx):
+    """Small framed photo in the pink page header. Decorative, so no alt text."""
+    return (f'<figure class="mat" aria-hidden="true"><img src="{ctx.asset("img/head-" + ctx.page + ".jpg")}" alt="" '
+            f'width="720" height="542" fetchpriority="high"></figure>')
+
+
 def registers(ctx, tint=False):
     r = ctx.t["registers"]
     cards = ""
@@ -479,7 +485,7 @@ def page_services(ctx):
         for i, x in enumerate(s["how"], 1)
     )
     body = f"""
-<section class="page-head"><div class="wrap"><h1>{e(s['title'])}</h1><p class="lead">{e(s['intro'])}</p></div></section>
+<section class="page-head has-photo"><div class="wrap page-head-grid"><div><h1>{e(s['title'])}</h1><p class="lead">{e(s['intro'])}</p></div>{head_photo(ctx)}</div></section>
 <section class="section"><div class="wrap narrow services">{items}</div></section>
 <section class="section tint">
   <div class="wrap">
@@ -500,7 +506,7 @@ def page_about(ctx):
         for k in ["vision", "mission", "quality", "care"]
     )
     body = f"""
-<section class="page-head"><div class="wrap"><h1>{e(a['title'])}</h1><p class="lead">{e(a['intro'])}</p></div></section>
+<section class="page-head has-photo"><div class="wrap page-head-grid"><div><h1>{e(a['title'])}</h1><p class="lead">{e(a['intro'])}</p></div>{head_photo(ctx)}</div></section>
 
 <section class="section">
   <div class="wrap narrow"><h2>{e(a['philosophy_title'])}</h2><p class="big">{e(a['philosophy'])}</p></div>
@@ -536,7 +542,7 @@ def page_faq(ctx):
         f"<details><summary>{e(i['q'])}</summary><p>{e(i['a'])}</p></details>" for i in f["items"]
     )
     body = f"""
-<section class="page-head"><div class="wrap"><h1>{e(f['title'])}</h1></div></section>
+<section class="page-head has-photo"><div class="wrap page-head-grid"><div><h1>{e(f['title'])}</h1></div>{head_photo(ctx)}</div></section>
 <section class="section"><div class="wrap narrow faq">{items}</div></section>
 {cta_band(ctx, ctx.t['services']['cta_title'], ctx.t['services']['cta_text'], ctx.t['services']['cta'])}
 """
@@ -554,7 +560,7 @@ def page_contact(ctx):
         ensure_ascii=False,
     )
     body = f"""
-<section class="page-head"><div class="wrap"><h1>{e(c['title'])}</h1><p class="lead">{e(c['intro'])}</p></div></section>
+<section class="page-head has-photo"><div class="wrap page-head-grid"><div><h1>{e(c['title'])}</h1><p class="lead">{e(c['intro'])}</p></div>{head_photo(ctx)}</div></section>
 <section class="section">
   <div class="wrap contact-grid">
     <aside class="details">
@@ -630,7 +636,7 @@ def page_appointment(ctx):
         f'<label class="slot"><input type="radio" name="time" value="{s}" disabled><span>{s}</span></label>' for s in SLOTS
     )
     body = f"""
-<section class="page-head"><div class="wrap"><h1>{e(a['title'])}</h1><p class="lead">{e(a['intro'])}</p></div></section>
+<section class="page-head has-photo"><div class="wrap page-head-grid"><div><h1>{e(a['title'])}</h1><p class="lead">{e(a['intro'])}</p></div>{head_photo(ctx)}</div></section>
 <section class="section">
   <div class="wrap narrow">
     <div class="plan-note">{ico('clock')}<div><strong>{e(a['notice_title'])}</strong><p>{e(a['notice'])} <a class="nowrap" href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a></p></div></div>
@@ -692,7 +698,7 @@ def page_privacy(ctx):
     p = ctx.t["privacy"]
     secs = "".join(f"<h2>{e(s['h'])}</h2><p>{e(s['p'])}</p>" for s in p["sections"])
     body = f"""
-<section class="page-head"><div class="wrap"><h1>{e(p['title'])}</h1></div></section>
+<section class="page-head has-photo"><div class="wrap page-head-grid"><div><h1>{e(p['title'])}</h1></div>{head_photo(ctx)}</div></section>
 <section class="section"><div class="wrap narrow prose">{secs}</div></section>
 """
     return p["title"], p["description"], body

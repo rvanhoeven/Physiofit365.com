@@ -337,3 +337,14 @@ input:focus, select:focus, textarea:focus { outline: 3px solid var(--pink); outl
 .register-name { color: var(--muted); font-size: .94rem; line-height: 1.4; margin-bottom: 12px; }
 .register .more { margin-top: auto; }
 @media (max-width: 620px) { .registers { grid-template-columns: 1fr; } }
+
+/* framed photo in the pink page header: white passe-partout with a fine inner line */
+.page-head-grid { display: grid; grid-template-columns: minmax(0, 1fr) clamp(240px, 26vw, 320px); gap: clamp(24px, 5vw, 64px); align-items: center; }
+.mat { margin: 0; padding: 16px 16px 16px; background: #fff; border: 1px solid var(--line); border-radius: 4px; box-shadow: 0 12px 28px rgba(168, 0, 122, .14), 0 2px 6px rgba(23, 17, 27, .06); }
+.mat img { width: 100%; height: auto; outline: 1px solid rgba(23, 17, 27, .22); outline-offset: 5px; border-radius: 1px; }
+.mat { padding: 22px; }
+@media (max-width: 760px) {
+  .page-head-grid { grid-template-columns: 1fr; }
+  .mat { width: min(240px, 70%); padding: 14px; }
+  .mat img { outline-offset: 3px; }
+}
