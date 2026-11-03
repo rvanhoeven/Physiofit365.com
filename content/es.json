@@ -471,7 +471,7 @@
     "physio_role": "Fisioterapeuta",
     "nurse_role": "Enfermera",
     "number": "N.º de colegiada",
-    "physio_link": "Ir al colegio",
+    "physio_link": "Consultar el registro",
     "nurse_link": "Consultar el registro"
   }
 }

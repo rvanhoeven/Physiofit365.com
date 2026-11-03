@@ -52,7 +52,7 @@ SLOTS = ["17:30", "18:00", "18:30", "19:00", "19:30", "20:00"]
 # Professional registers. "local" is used when that file exists in site/assets/img; until then the college's own logo URL.
 REGISTERS = [
     {"key": "physio", "name": "Ilustre Colegio Oficial de Fisioterapeutas de la Comunidad Valenciana", "number": "6.048",
-     "url": "https://www.colfisiocv.com/", "local": "colegio-fisioterapeutas.png",
+     "url": "https://app.colfisiocv.com/college/collegiatelist/", "local": "colegio-fisioterapeutas.png",
      "logo": "https://www.colfisiocv.com/sites/default/files/prueba_2.png"},
     {"key": "nurse", "name": "Colegio Oficial de Enfermería de Alicante", "number": "18.067",
      "url": "https://www.enferalicante.org/buscar_colegiados.php", "local": "colegio-enfermeria.png",

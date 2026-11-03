@@ -471,7 +471,7 @@
     "physio_role": "Physiotherapist",
     "nurse_role": "Nurse",
     "number": "Registration no.",
-    "physio_link": "Visit the college",
+    "physio_link": "Check in the register",
     "nurse_link": "Check in the register"
   }
 }
