@@ -348,3 +348,15 @@ input:focus, select:focus, textarea:focus { outline: 3px solid var(--pink); outl
   .mat { width: min(240px, 70%); padding: 14px; }
   .mat img { outline-offset: 3px; }
 }
+
+/* WhatsApp button, always in view */
+.wa-float { position: fixed; right: 20px; bottom: 20px; z-index: 60; display: inline-flex; align-items: center; gap: 9px; padding: 12px 18px 12px 14px; border-radius: 999px; background: #0b7a43; color: #fff; font-weight: 700; text-decoration: none; box-shadow: 0 8px 22px rgba(23, 17, 27, .28); transition: transform .15s; }
+.wa-float:hover { background: #096737; color: #fff; transform: translateY(-2px); }
+.wa-float svg { width: 26px; height: 26px; flex: none; }
+.wa-ico svg { fill: none; stroke: none; }
+@media (max-width: 620px) {
+  .wa-float { right: 14px; bottom: 14px; width: 56px; height: 56px; padding: 0; justify-content: center; }
+  .wa-float span { display: none; }
+  .wa-float svg { width: 30px; height: 30px; }
+  .site-footer { padding-bottom: 84px; }
+}
