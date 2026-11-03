@@ -35,5 +35,4 @@ Briliantine Script is not used: the supplied file is a demo with no accents or d
 
 `.github/workflows/pages.yml` builds and publishes `site/` to GitHub Pages on every push to `main`.
 One-time setup: repository **Settings > Pages > Build and deployment > Source = GitHub Actions**.
-Preview URL: https://rvanhoeven.github.io/physiofit365/
-For the real domain, set the repository variable `SITE_URL` (for example `https://www.physiofit365.com`) so canonical links and the sitemap use it.
+The live domain `https://www.physiofit365.com` is set in the workflow; canonical links, the sitemap and robots.txt use it.

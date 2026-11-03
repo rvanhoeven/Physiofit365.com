@@ -36,7 +36,7 @@
   },
   "home": {
     "title": "Fysiotherapie aan huis aan de Costa Blanca",
-    "description": "PhysioFit365: manuele therapie, revalidatie na werk- en sportblessures en zorg voor ouderen, bij u thuis in en rond Rojales. Door Mellany van Hoeven, fysiotherapeut en verpleegkundige.",
+    "description": "Fysiotherapie bij u thuis in Rojales, Ciudad Quesada, Formentera del Segura, Benijófar en Algorfa door Mellany van Hoeven, fysiotherapeut en verpleegkundige.",
     "eyebrow": "Fysiotherapie & revalidatie · Rojales",
     "hero_title": "Herstel in uw eigen vertrouwde omgeving",
     "hero_sub": "Persoonlijke fysiotherapie door Mellany van Hoeven, fysiotherapeut en verpleegkundige. Zij komt naar u toe in en rond Rojales en neemt echt de tijd voor u.",
@@ -152,11 +152,12 @@
       "Formentera del Segura",
       "Benijófar",
       "Algorfa"
-    ]
+    ],
+    "seo_title": "Fysiotherapie aan huis in Rojales, Costa Blanca | PhysioFit365"
   },
   "services": {
     "title": "Behandelingen",
-    "description": "Manuele therapie, werkblessures en sportblessures: fysiotherapie aan huis aan de Costa Blanca door PhysioFit365.",
+    "description": "Manuele therapie, werk- en sportblessures, revalidatie na een operatie en zorg voor ouderen, bij u thuis in en rond Rojales.",
     "intro": "Elke behandeling begint met een grondig onderzoek en eindigt met een plan dat u zelf kunt volgen, zodat u actief meewerkt aan uw herstel.",
     "items": [
       {
@@ -245,11 +246,12 @@
     ],
     "cta_title": "Weet u niet welke behandeling past?",
     "cta_text": "Beschrijf uw klacht en wij adviseren u.",
-    "cta": "Stel een vraag"
+    "cta": "Stel een vraag",
+    "seo_title": "Behandelingen fysiotherapie aan huis, Rojales | PhysioFit365"
   },
   "about": {
     "title": "Over PhysioFit365",
-    "description": "Maak kennis met Mellany Ginny van Hoeven, fysiotherapeut en verpleegkundige, en lees hoe PhysioFit365 werkt.",
+    "description": "Maak kennis met Mellany van Hoeven: geregistreerd fysiotherapeut en verpleegkundige, die u thuis behandelt in en rond Rojales aan de Costa Blanca.",
     "intro": "PhysioFit365 biedt fysiotherapie aan huis aan de Costa Blanca, met de combinatie van traditionele fysiotherapie en moderne manuele therapie.",
     "philosophy_title": "Onze visie op behandelen",
     "philosophy": "Therapie werkt het best als mensen als geheel worden behandeld en niet als losse lichaamsdelen. Wij zoeken de oorzaak van uw klacht en behandelen die.",
@@ -277,11 +279,12 @@
     ],
     "languages_title": "Talen",
     "languages": "Nederlands, Engels en Spaans",
-    "cta": "Neem contact op met Mellany"
+    "cta": "Neem contact op met Mellany",
+    "seo_title": "Mellany van Hoeven, fysiotherapeut | PhysioFit365"
   },
   "faq": {
     "title": "Veelgestelde vragen",
-    "description": "Antwoorden op veelgestelde vragen over fysiotherapie en behandeling aan huis door PhysioFit365.",
+    "description": "Antwoorden op veelgestelde vragen over fysiotherapie aan huis in en rond Rojales: hoe een bezoek werkt en wat u kunt verwachten.",
     "items": [
       {
         "q": "Wat is een fysiotherapeut?",
@@ -327,11 +330,12 @@
         "q": "Hoe kom ik in contact?",
         "a": "Gebruik het contactformulier, bel ons of mail naar info@physiofit365.com. Wij zijn bereikbaar van maandag tot en met vrijdag, 15:00 tot 21:00."
       }
-    ]
+    ],
+    "seo_title": "Veelgestelde vragen fysiotherapie aan huis | PhysioFit365"
   },
   "contact": {
     "title": "Contact",
-    "description": "Neem contact op met PhysioFit365 in Rojales: stel een vraag of vraag een bezoek aan huis aan, telefonisch of per e-mail.",
+    "description": "Neem contact op met PhysioFit365 in Rojales via telefoon, WhatsApp of e-mail. Stel een vraag of vraag een bezoek aan huis aan.",
     "intro": "Stel uw vraag telefonisch of stuur ons een bericht via het formulier hieronder. Uw bericht gaat rechtstreeks naar ons team en wij antwoorden zo snel mogelijk.",
     "details_title": "Onze gegevens",
     "form_title": "Stuur ons een bericht",
@@ -363,7 +367,8 @@
     "invalid": "Controleer de gemarkeerde velden.",
     "not_configured": "Het formulier is nog niet gekoppeld. Bel of mail ons rechtstreeks.",
     "first_name": "Voornaam",
-    "last_name": "Achternaam"
+    "last_name": "Achternaam",
+    "seo_title": "Contact fysiotherapeut aan huis, Rojales | PhysioFit365"
   },
   "privacy": {
     "title": "Privacybeleid",
@@ -397,7 +402,8 @@
         "h": "Cookies",
         "p": "Deze website gebruikt geen tracking- of advertentiecookies."
       }
-    ]
+    ],
+    "seo_title": "Privacybeleid | PhysioFit365"
   },
   "testimonials": [
     {
@@ -464,7 +470,8 @@
     "success": "U ontvangt een bevestiging per e-mail. Dit is een verzoek en nog geen bevestigde afspraak: Mellany neemt persoonlijk contact met u op.",
     "err_date": "Kies een datum.",
     "err_time": "Kies een tijd.",
-    "err_full": "Deze datum is niet meer beschikbaar. Kies een andere datum."
+    "err_full": "Deze datum is niet meer beschikbaar. Kies een andere datum.",
+    "seo_title": "Afspraak fysiotherapie aan huis, Rojales | PhysioFit365"
   },
   "registers": {
     "title": "Officieel geregistreerd",

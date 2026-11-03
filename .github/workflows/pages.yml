@@ -22,12 +22,14 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # the sitemap's lastmod comes from the git history
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - name: Build site
-        # Set the repository variable SITE_URL (Settings > Variables) to the final domain, e.g. https://www.physiofit365.com
-        run: BASE_URL="${{ vars.SITE_URL || format('https://{0}.github.io/{1}', github.repository_owner, github.event.repository.name) }}" python3 build.py
+        # The live domain. Canonical links, the sitemap and robots.txt all use it.
+        run: BASE_URL=https://www.physiofit365.com python3 build.py
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -11,6 +11,7 @@ import json
 import os
 import re
 import shutil
+import subprocess
 from urllib.parse import quote
 from html import escape as e
 from pathlib import Path
@@ -125,6 +126,20 @@ def abs_url(lang, page):
     return f"{BASE_URL}/{lang}/{PATHS[page]}"
 
 
+def translations_locale(lang):
+    return {"en": "en_US", "nl": "nl_NL", "es": "es_ES"}[lang]
+
+
+def last_modified():
+    """Date of the last commit that changed the texts or the page templates."""
+    try:
+        out = subprocess.run(["git", "log", "-1", "--format=%cs", "--", "content", "build.py"],
+                             cwd=ROOT, capture_output=True, text=True, check=True).stdout.strip()
+    except (OSError, subprocess.CalledProcessError):
+        out = ""
+    return out
+
+
 def json_ld(data):
     text = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
     return f'<script type="application/ld+json">{text}</script>'
@@ -133,10 +148,29 @@ def json_ld(data):
 def structured_data(ctx):
     """Search engine data: the business on home pages, the questions on FAQ pages."""
     t = ctx.t
+    business_id = f"{BASE_URL}/#business"
+    crumbs = "" if ctx.page == "home" else json_ld({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": t["site_name"], "item": abs_url(ctx.lang, "home")},
+            {"@type": "ListItem", "position": 2, "name": t[ctx.page]["title"], "item": abs_url(ctx.lang, ctx.page)},
+        ],
+    })
     if ctx.page == "home":
-        return json_ld({
+        website = json_ld({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "@id": f"{BASE_URL}/#website",
+            "name": t["site_name"],
+            "url": f"{BASE_URL}/",
+            "inLanguage": LANGS,
+            "publisher": {"@id": business_id},
+        })
+        return website + "\n" + json_ld({
             "@context": "https://schema.org",
             "@type": "Physiotherapy",
+            "@id": business_id,
             "name": t["site_name"],
             "description": t["home"]["description"],
             "url": abs_url(ctx.lang, "home"),
@@ -159,11 +193,20 @@ def structured_data(ctx):
                 "opens": "15:00",
                 "closes": "21:00",
             },
-            "availableLanguage": ["en", "nl", "es"],
+            "availableLanguage": LANGS,
             "sameAs": [FACEBOOK, INSTAGRAM],
+            "employee": {"@type": "Person", "name": "Mellany Ginny van Hoeven", "jobTitle": t["about"]["mellany_role"]},
+            "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": t["services"]["title"],
+                "itemListElement": [
+                    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": i["title"], "description": i["short"], "url": f"{abs_url(ctx.lang, 'services')}#{i['id']}"}}
+                    for i in t["services"]["items"]
+                ],
+            },
         })
     if ctx.page == "faq":
-        return json_ld({
+        return crumbs + "\n" + json_ld({
             "@context": "https://schema.org",
             "@type": "FAQPage",
             "mainEntity": [
@@ -171,12 +214,15 @@ def structured_data(ctx):
                 for i in t["faq"]["items"]
             ],
         })
-    return ""
+    return crumbs
 
 
 def head(ctx, title, description):
     t = ctx.t
-    full_title = f"{title} | {t['site_name']}" if ctx.page != "home" else f"{t['site_name']} – {title}"
+    full_title = t[ctx.page]["seo_title"]
+    og_alts = "\n".join(
+        f'<meta property="og:locale:alternate" content="{translations_locale(l)}">' for l in LANGS if l != ctx.lang
+    )
     alts = "\n".join(
         f'<link rel="alternate" hreflang="{l}" href="{abs_url(l, ctx.page)}">' for l in LANGS
     )
@@ -195,8 +241,14 @@ def head(ctx, title, description):
 <meta property="og:title" content="{e(full_title)}">
 <meta property="og:description" content="{e(description)}">
 <meta property="og:locale" content="{t['locale']}">
+{og_alts}
 <meta property="og:url" content="{abs_url(ctx.lang, ctx.page)}">
-<meta property="og:image" content="{BASE_URL}/assets/img/logo.png">
+<meta property="og:image" content="{BASE_URL}/assets/img/mellany.jpg">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="813">
+<meta property="og:image:alt" content="Mellany Ginny van Hoeven">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#fe26ac">
 <link rel="icon" href="{ctx.asset('img/favicon.svg')}" type="image/svg+xml">
 <link rel="icon" href="{ctx.asset('img/favicon.ico')}" sizes="48x48">
@@ -742,8 +794,8 @@ def main():
 <title>PhysioFit365</title>
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="assets/img/favicon.ico" sizes="48x48">
+<meta name="description" content="{e(translations['en']['home']['description'])}">
 <link rel="canonical" href="{BASE_URL}/en/">
-<link rel="alternate" hreflang="x-default" href="{BASE_URL}/en/">
 <noscript><meta http-equiv="refresh" content="0; url=en/"></noscript>
 <script>
 (function () {{
@@ -753,10 +805,26 @@ def main():
 </script></head>
 <body><p><a href="en/">English</a> · <a href="nl/">Nederlands</a> · <a href="es/">Español</a></p></body></html>
 """)
+    # GitHub Pages serves this for unknown addresses, with a real 404 status.
+    write(SITE / "404.html", f"""<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found | PhysioFit365</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body><main id="main"><section class="section"><div class="wrap narrow">
+<p><a href="/en/"><img src="/assets/img/logo.png" alt="PhysioFit365" width="132" height="74"></a></p>
+<h1>Page not found</h1>
+<p><a href="/en/">English</a> · <a href="/nl/" lang="nl">Pagina niet gevonden: naar de homepage</a> · <a href="/es/" lang="es">Página no encontrada: ir al inicio</a></p>
+</div></section></main></body></html>
+""")
+    lastmod = last_modified()
+    lastmod_tag = f"<lastmod>{lastmod}</lastmod>" if lastmod else ""
     urls = "".join(
-        f"<url><loc>{abs_url(l, p)}</loc>" + "".join(
+        f"<url><loc>{abs_url(l, p)}</loc>{lastmod_tag}" + "".join(
             f'<xhtml:link rel="alternate" hreflang="{x}" href="{abs_url(x, p)}"/>' for x in LANGS
-        ) + "</url>\n"
+        ) + f'<xhtml:link rel="alternate" hreflang="x-default" href="{abs_url("en", p)}"/>' + "</url>\n"
         for l in LANGS for p in PAGES
     )
     write(SITE / "sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n{urls}</urlset>\n')

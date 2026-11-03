@@ -36,7 +36,7 @@
   },
   "home": {
     "title": "Fisioterapia a domicilio en la Costa Blanca",
-    "description": "PhysioFit365: terapia manual, rehabilitación de lesiones laborales y deportivas y cuidado de personas mayores, en tu domicilio en Rojales y alrededores. Por Mellany van Hoeven, fisioterapeuta y enfermera.",
+    "description": "Fisioterapia a domicilio en Rojales, Ciudad Quesada, Formentera del Segura, Benijófar y Algorfa con Mellany van Hoeven, fisioterapeuta y enfermera.",
     "eyebrow": "Fisioterapia y rehabilitación · Rojales",
     "hero_title": "Recupérate en la comodidad de tu hogar",
     "hero_sub": "Fisioterapia personalizada de la mano de Mellany van Hoeven, fisioterapeuta y enfermera. Va a tu domicilio en Rojales y alrededores y se toma el tiempo de escucharte.",
@@ -152,11 +152,12 @@
       "Formentera del Segura",
       "Benijófar",
       "Algorfa"
-    ]
+    ],
+    "seo_title": "Fisioterapia a domicilio en Rojales, Costa Blanca | PhysioFit365"
   },
   "services": {
     "title": "Tratamientos",
-    "description": "Terapia manual, lesiones laborales y lesiones deportivas: fisioterapia a domicilio en la Costa Blanca con PhysioFit365.",
+    "description": "Terapia manual, lesiones laborales y deportivas, rehabilitación tras una operación y atención a mayores, en tu domicilio en Rojales y alrededores.",
     "intro": "Cada tratamiento empieza con una valoración completa y termina con un plan que puedes seguir por tu cuenta, para que participes activamente en tu recuperación.",
     "items": [
       {
@@ -245,11 +246,12 @@
     ],
     "cta_title": "¿No sabes qué tratamiento te conviene?",
     "cta_text": "Describe tu dolencia y te aconsejamos.",
-    "cta": "Haz una consulta"
+    "cta": "Haz una consulta",
+    "seo_title": "Tratamientos de fisioterapia a domicilio, Rojales | PhysioFit365"
   },
   "about": {
     "title": "Sobre PhysioFit365",
-    "description": "Conoce a Mellany Ginny van Hoeven, fisioterapeuta y enfermera, y descubre cómo trabaja PhysioFit365.",
+    "description": "Conoce a Mellany van Hoeven: fisioterapeuta y enfermera colegiada, que te atiende en tu domicilio en Rojales y alrededores, en la Costa Blanca.",
     "intro": "PhysioFit365 ofrece fisioterapia a domicilio en la Costa Blanca, combinando la fisioterapia tradicional con la terapia manual moderna.",
     "philosophy_title": "Nuestra filosofía",
     "philosophy": "La terapia funciona mejor cuando se trata a las personas como un todo y no como partes del cuerpo aisladas. Buscamos las causas de tu dolencia y las tratamos.",
@@ -277,11 +279,12 @@
     ],
     "languages_title": "Idiomas",
     "languages": "Español, inglés y neerlandés",
-    "cta": "Contacta con Mellany"
+    "cta": "Contacta con Mellany",
+    "seo_title": "Mellany van Hoeven, fisioterapeuta y enfermera | PhysioFit365"
   },
   "faq": {
     "title": "Preguntas frecuentes",
-    "description": "Respuestas a preguntas habituales sobre fisioterapia y visitas a domicilio con PhysioFit365.",
+    "description": "Respuestas a preguntas habituales sobre la fisioterapia a domicilio en Rojales y alrededores: cómo es una visita y qué puedes esperar.",
     "items": [
       {
         "q": "¿Qué es un fisioterapeuta?",
@@ -327,11 +330,12 @@
         "q": "¿Cómo me pongo en contacto?",
         "a": "Usa el formulario de contacto, llámanos o escribe a info@physiofit365.com. Estamos disponibles de lunes a viernes, de 15:00 a 21:00."
       }
-    ]
+    ],
+    "seo_title": "Preguntas frecuentes, fisioterapia a domicilio | PhysioFit365"
   },
   "contact": {
     "title": "Contacto",
-    "description": "Contacta con PhysioFit365 en Rojales: haz una consulta o solicita una visita a domicilio por teléfono o correo electrónico.",
+    "description": "Contacta con PhysioFit365 en Rojales por teléfono, WhatsApp o correo electrónico. Haz una consulta o solicita una visita a domicilio.",
     "intro": "Haz tu consulta por teléfono o envíanos un mensaje con el formulario. Tu mensaje llega directamente a nuestro equipo y respondemos lo antes posible.",
     "details_title": "Nuestros datos",
     "form_title": "Envíanos un mensaje",
@@ -363,7 +367,8 @@
     "invalid": "Revisa los campos marcados.",
     "not_configured": "El formulario aún no está conectado. Llámanos o escríbenos directamente.",
     "first_name": "Nombre",
-    "last_name": "Apellidos"
+    "last_name": "Apellidos",
+    "seo_title": "Contacto fisioterapeuta a domicilio, Rojales | PhysioFit365"
   },
   "privacy": {
     "title": "Política de privacidad",
@@ -397,7 +402,8 @@
         "h": "Cookies",
         "p": "Este sitio web no utiliza cookies de seguimiento ni publicitarias."
       }
-    ]
+    ],
+    "seo_title": "Política de privacidad | PhysioFit365"
   },
   "testimonials": [
     {
@@ -464,7 +470,8 @@
     "success": "Te hemos enviado una confirmación por correo electrónico. Es una solicitud, todavía no una cita confirmada: Mellany se pondrá en contacto contigo personalmente.",
     "err_date": "Elige una fecha.",
     "err_time": "Elige una hora.",
-    "err_full": "Esta fecha ya no está disponible. Elige otra."
+    "err_full": "Esta fecha ya no está disponible. Elige otra.",
+    "seo_title": "Pedir cita de fisioterapia a domicilio, Rojales | PhysioFit365"
   },
   "registers": {
     "title": "Colegiada oficialmente",
