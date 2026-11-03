@@ -11,7 +11,8 @@
     "contact": "Contacto",
     "cta": "Contacta",
     "menu": "Menú",
-    "language": "Idioma"
+    "language": "Idioma",
+    "appointment": "Pedir cita"
   },
   "common": {
     "tagline": "Fisioterapia a domicilio en la Costa Blanca",
@@ -372,7 +373,7 @@
       },
       {
         "h": "Qué datos recogemos",
-        "p": "Solo lo que introduces en el formulario de contacto: nombre, correo electrónico, teléfono, localidad o zona, el asunto de tu consulta, tu mensaje, si prefieres respuesta por teléfono o por correo, y el idioma de la página que usaste. También guardamos la hora de tu solicitud."
+        "p": "Solo lo que rellenas en el formulario de contacto o de cita: nombre, correo electrónico, teléfono, dirección, localidad o zona, la fecha y hora que prefieres, el asunto de tu consulta, tu mensaje y si prefieres respuesta por teléfono o correo. También guardamos el idioma de tu navegador y de la página, para responderte en tu idioma, y la hora de tu solicitud. Si solicitas una cita, guardamos tus datos como contacto."
       },
       {
         "h": "Para qué los recogemos",
@@ -380,7 +381,7 @@
       },
       {
         "h": "Dónde se almacenan",
-        "p": "Las solicitudes se guardan en una base de datos alojada en la Unión Europea. Solo PhysioFit365 puede leerlas. No vendemos ni compartimos tus datos con fines de marketing. Al enviar el formulario, también se envía un aviso por correo electrónico a PhysioFit365 a través de un servicio de envío de correo (Resend)."
+        "p": "Las solicitudes se guardan en una base de datos alojada en la Unión Europea. Solo PhysioFit365 puede leerlas. No vendemos ni compartimos tus datos con fines de marketing. Cuando envías un formulario, se manda un aviso a PhysioFit365 y una confirmación a la dirección que has indicado, a través de un servicio de envío de correo (Resend)."
       },
       {
         "h": "Cuánto tiempo los conservamos",
@@ -435,5 +436,32 @@
       "name": "ASISA",
       "url": "https://www.asisa.es/"
     }
-  ]
+  ],
+  "appointment": {
+    "title": "Solicita una cita",
+    "description": "Solicita una visita a domicilio de la fisioterapeuta Mellany van Hoeven en Rojales y alrededores. Elige un día laborable y una hora que te vengan bien.",
+    "intro": "Elige la fecha y la hora que te vengan bien. Mellany va a tu casa y se pondrá en contacto contigo personalmente para confirmar.",
+    "notice_title": "Mellany planifica con aproximadamente una semana de antelación",
+    "notice": "No es posible una cita inmediata, por eso las primeras fechas disponibles son dentro de aproximadamente una semana. ¿Tienes alguna pregunta mientras tanto? Llámanos o envíanos un mensaje.",
+    "form_title": "Tu solicitud",
+    "step_date": "Elige una fecha",
+    "step_time": "Elige una hora",
+    "step_details": "Tus datos",
+    "prev": "Mes anterior",
+    "next": "Mes siguiente",
+    "cal_hint": "No se pueden elegir fines de semana ni fechas a menos de una semana.",
+    "time_hint": "Las visitas son por la tarde, a partir de las 17:30. Una sesión suele durar entre 45 y 60 minutos.",
+    "choose_date_first": "Elige primero una fecha",
+    "address": "Calle y número",
+    "address_hint": "Vamos a tu casa, por eso necesitamos tu dirección.",
+    "town": "Localidad",
+    "message": "¿Algo que quieras añadir? (opcional)",
+    "consent": "Acepto que PhysioFit365 guarde mis datos como contacto para gestionar mi solicitud. Consulta la {privacy_link}.",
+    "submit": "Enviar solicitud",
+    "success_title": "Gracias, tu solicitud está en camino",
+    "success": "Te hemos enviado una confirmación por correo electrónico. Es una solicitud, todavía no una cita confirmada: Mellany se pondrá en contacto contigo personalmente.",
+    "err_date": "Elige una fecha.",
+    "err_time": "Elige una hora.",
+    "err_full": "Esta fecha ya no está disponible. Elige otra."
+  }
 }

@@ -19,8 +19,8 @@ ROOT = Path(__file__).parent
 SITE = ROOT / "site"
 BASE_URL = os.environ.get("BASE_URL", "https://www.physiofit365.com").rstrip("/")
 LANGS = ["en", "nl", "es"]          # en = base language
-PAGES = ["home", "about", "services", "faq", "contact", "privacy"]
-PATHS = {"home": "", "about": "about/", "services": "services/", "faq": "faq/", "contact": "contact/", "privacy": "privacy/"}
+PAGES = ["home", "about", "services", "faq", "appointment", "contact", "privacy"]
+PATHS = {"home": "", "about": "about/", "services": "services/", "faq": "faq/", "appointment": "appointment/", "contact": "contact/", "privacy": "privacy/"}
 
 PHONE_DISPLAY = "+34 686 04 22 00"
 PHONE_TEL = "+34686042200"
@@ -44,8 +44,11 @@ ICONS = {
     "pin": '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>',
     "surgery": '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/></svg>',
     "elderly": '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-8-4.7-8-10.5A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 8 2.5C20 15.300 12 20 12 20z"/></svg>',
+    "calendar": '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>',
     "clock": '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
 }
+# Appointment times. Keep in sync with the check on appointment_requests.requested_time in the database.
+SLOTS = ["17:30", "18:00", "18:30", "19:00", "19:30", "20:00"]
 ADV_ICONS = ["user", "home", "badge", "team", "star", "target"]
 BENEFIT_ICONS = ["pin", "home", "user", "team"]
 
@@ -212,13 +215,14 @@ def header(ctx):
     <a class="brand" href="{ctx.url('home')}" aria-label="{e(t['site_name'])} – {e(t['nav']['home'])}">
       <img src="{ctx.asset('img/logo.png')}" alt="{e(t['site_name'])}" width="132" height="74">
     </a>
+    <a class="btn btn-sm btn-appt" href="{ctx.url('appointment')}"{cur(ctx.page == "appointment", "page")}>{ICONS["calendar"]}{e(t['nav']['appointment'])}</a>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">
       <span class="sr">{e(t['nav']['menu'])}</span><span class="bars" aria-hidden="true"></span>
     </button>
     <nav id="nav" class="nav" aria-label="{e(t['nav']['menu'])}">
       <ul>{links}</ul>
       <div class="lang" role="group" aria-label="{e(t['nav']['language'])}">{langs}</div>
-      <a class="btn btn-sm" href="{ctx.form_url()}"{cur(ctx.page == "contact", "page")}>{e(t['nav']['cta'])}</a>
+      <a class="btn btn-sm btn-ghost" href="{ctx.form_url()}"{cur(ctx.page == "contact", "page")}>{e(t['nav']['cta'])}</a>
     </nav>
   </div>
 </header>
@@ -570,6 +574,77 @@ def page_contact(ctx):
     return c["title"], c["description"], body
 
 
+def page_appointment(ctx):
+    a, c, com = ctx.t["appointment"], ctx.t["contact"], ctx.t["common"]
+    opts = f'<option value="">{e(c["service_options"][""])}</option>' + "".join(
+        f'<option value="{e(i["id"])}">{e(i["title"])}</option>' for i in ctx.t["services"]["items"]
+    ) + f'<option value="other">{e(c["service_options"]["other"])}</option>'
+    consent = e(a["consent"]).replace(
+        "{privacy_link}", f'<a href="{ctx.url("privacy")}">{e(c["privacy_link_text"])}</a>'
+    )
+    msgs = json.dumps(
+        {"sending": c["sending"], "submit": a["submit"], "error": c["error"], "invalid": c["invalid"], "not_configured": c["not_configured"],
+         "prev": a["prev"], "next": a["next"], "err_date": a["err_date"], "err_time": a["err_time"], "err_full": a["err_full"]},
+        ensure_ascii=False,
+    )
+    slots = "".join(
+        f'<label class="slot"><input type="radio" name="time" value="{s}" disabled><span>{s}</span></label>' for s in SLOTS
+    )
+    body = f"""
+<section class="page-head"><div class="wrap"><h1>{e(a['title'])}</h1><p class="lead">{e(a['intro'])}</p></div></section>
+<section class="section">
+  <div class="wrap narrow">
+    <div class="plan-note">{ico('clock')}<div><strong>{e(a['notice_title'])}</strong><p>{e(a['notice'])} <a class="nowrap" href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a></p></div></div>
+    <div class="form-card">
+      <h2>{e(a['form_title'])}</h2>
+      <form id="appointment-form" novalidate data-lang="{ctx.lang}" data-messages='{e(msgs, quote=True)}'>
+        <fieldset class="field pick" id="pick-date">
+          <legend>1. {e(a['step_date'])} <span class="req">*</span></legend>
+          <div class="cal" id="cal"></div>
+          <small>{e(a['cal_hint'])}</small>
+        </fieldset>
+        <fieldset class="field pick" id="pick-time">
+          <legend>2. {e(a['step_time'])} <span class="req">*</span></legend>
+          <p class="picked" id="picked-date">{e(a['choose_date_first'])}</p>
+          <div class="slots">{slots}</div>
+          <small>{e(a['time_hint'])}</small>
+        </fieldset>
+        <h3>3. {e(a['step_details'])}</h3>
+        <div class="field"><label for="a-name">{e(c['name'])} <span class="req">*</span></label>
+          <input id="a-name" name="name" type="text" autocomplete="name" required minlength="2" maxlength="120"></div>
+        <div class="row">
+          <div class="field"><label for="a-email">{e(c['email'])} <span class="req">*</span></label>
+            <input id="a-email" name="email" type="email" autocomplete="email" required maxlength="254"></div>
+          <div class="field"><label for="a-phone">{e(c['phone'])} <span class="req">*</span></label>
+            <input id="a-phone" name="phone" type="tel" autocomplete="tel" required minlength="6" maxlength="40"></div>
+        </div>
+        <div class="row">
+          <div class="field"><label for="a-address">{e(a['address'])} <span class="req">*</span></label>
+            <input id="a-address" name="address" type="text" autocomplete="street-address" required minlength="3" maxlength="200" aria-describedby="addr-hint">
+            <small id="addr-hint">{e(a['address_hint'])}</small></div>
+          <div class="field"><label for="a-town">{e(a['town'])} <span class="req">*</span></label>
+            <input id="a-town" name="town" type="text" autocomplete="address-level2" required minlength="2" maxlength="120"></div>
+        </div>
+        <div class="field"><label for="a-service">{e(c['service'])}</label>
+          <select id="a-service" name="service">{opts}</select></div>
+        <div class="field"><label for="a-message">{e(a['message'])}</label>
+          <textarea id="a-message" name="message" rows="4" maxlength="4000"></textarea></div>
+        <div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+        <label class="consent"><input type="checkbox" name="consent" required> <span>{consent} <span class="req">*</span></span></label>
+        <p class="status" role="status" aria-live="polite"></p>
+        <button class="btn" type="submit">{e(a['submit'])}</button>
+      </form>
+      <div class="success" hidden tabindex="-1">
+        <h3>{e(a['success_title'])}</h3><p>{e(a['success'])}</p>
+      </div>
+      <noscript><p>{e(c['not_configured'])} <a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a></p></noscript>
+    </div>
+  </div>
+</section>
+"""
+    return a["title"], a["description"], body
+
+
 def page_privacy(ctx):
     p = ctx.t["privacy"]
     secs = "".join(f"<h2>{e(s['h'])}</h2><p>{e(s['p'])}</p>" for s in p["sections"])
@@ -580,7 +655,7 @@ def page_privacy(ctx):
     return p["title"], p["description"], body
 
 
-BUILDERS = {"home": page_home, "about": page_about, "services": page_services, "faq": page_faq, "contact": page_contact, "privacy": page_privacy}
+BUILDERS = {"home": page_home, "about": page_about, "services": page_services, "faq": page_faq, "appointment": page_appointment, "contact": page_contact, "privacy": page_privacy}
 
 
 def write(path, text):
