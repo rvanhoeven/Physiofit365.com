@@ -49,6 +49,15 @@ ICONS = {
 }
 # Appointment times. Keep in sync with the check on appointment_requests.requested_time in the database.
 SLOTS = ["17:30", "18:00", "18:30", "19:00", "19:30", "20:00"]
+# Professional registers. "local" is used when that file exists in site/assets/img; until then the college's own logo URL.
+REGISTERS = [
+    {"key": "physio", "name": "Ilustre Colegio Oficial de Fisioterapeutas de la Comunidad Valenciana", "number": "6.048",
+     "url": "https://www.colfisiocv.com/", "local": "colegio-fisioterapeutas.png",
+     "logo": "https://www.colfisiocv.com/sites/default/files/prueba_2.png"},
+    {"key": "nurse", "name": "Colegio Oficial de Enfermería de Alicante", "number": "18.067",
+     "url": "https://www.enferalicante.org/buscar_colegiados.php", "local": "colegio-enfermeria.png",
+     "logo": "https://www.enferalicante.org/Images/logoCol.png"},
+]
 ADV_ICONS = ["user", "home", "badge", "team", "star", "target"]
 BENEFIT_ICONS = ["pin", "home", "user", "team"]
 
@@ -288,6 +297,28 @@ def cta_band(ctx, title, text, label):
 """
 
 
+def registers(ctx, tint=False):
+    r = ctx.t["registers"]
+    cards = ""
+    for x in REGISTERS:
+        src = ctx.asset("img/" + x["local"]) if (SITE / "assets" / "img" / x["local"]).exists() else x["logo"]
+        cards += f"""<article class="register">
+  <a class="register-logo" href="{e(x['url'])}" rel="noopener" target="_blank"><img src="{e(src)}" alt="{e(x['name'])}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'"></a>
+  <h3>{e(r[x['key'] + '_role'])}</h3>
+  <p class="register-no">{e(r['number'])} <strong>{x['number']}</strong></p>
+  <p class="register-name">{e(x['name'])}</p>
+  <a class="more" href="{e(x['url'])}" rel="noopener" target="_blank">{e(r[x['key'] + '_link'])}</a>
+</article>"""
+    return f"""<section class="section{' tint' if tint else ''}">
+  <div class="wrap">
+    <h2 class="section-title">{e(r['title'])}</h2>
+    <p class="section-sub">{e(r['sub'])}</p>
+    <div class="registers">{cards}</div>
+  </div>
+</section>
+"""
+
+
 def testimonials(ctx):
     cards = "".join(
         f"""<figure class="quote">
@@ -408,6 +439,8 @@ def page_home(ctx):
   </div>
 </section>
 
+{registers(ctx)}
+
 {testimonials(ctx)}
 
 <section class="section">
@@ -489,7 +522,9 @@ def page_about(ctx):
   </div>
 </section>
 
-<section class="section"><div class="wrap"><div class="cards four">{blocks}</div></div></section>
+{registers(ctx)}
+
+<section class="section tint"><div class="wrap"><div class="cards four">{blocks}</div></div></section>
 {cta_band(ctx, ctx.t['home']['final_title'], ctx.t['home']['final_text'], a['cta'])}
 """
     return a["title"], a["description"], body
@@ -535,8 +570,12 @@ def page_contact(ctx):
     <div class="form-card" id="form">
       <h2>{e(c['form_title'])}</h2>
       <form id="contact-form" novalidate data-lang="{ctx.lang}" data-messages='{e(msgs, quote=True)}'>
-        <div class="field"><label for="f-name">{e(c['name'])} <span class="req">*</span></label>
-          <input id="f-name" name="name" type="text" autocomplete="name" required minlength="2" maxlength="120"></div>
+        <div class="row">
+          <div class="field"><label for="f-first">{e(c['first_name'])} <span class="req">*</span></label>
+            <input id="f-first" name="first_name" type="text" autocomplete="given-name" required maxlength="60"></div>
+          <div class="field"><label for="f-last">{e(c['last_name'])} <span class="req">*</span></label>
+            <input id="f-last" name="last_name" type="text" autocomplete="family-name" required maxlength="59"></div>
+        </div>
         <div class="row">
           <div class="field"><label for="f-email">{e(c['email'])} <span class="req">*</span></label>
             <input id="f-email" name="email" type="email" autocomplete="email" required maxlength="254"></div>
@@ -610,8 +649,12 @@ def page_appointment(ctx):
           <small>{e(a['time_hint'])}</small>
         </fieldset>
         <h3>3. {e(a['step_details'])}</h3>
-        <div class="field"><label for="a-name">{e(c['name'])} <span class="req">*</span></label>
-          <input id="a-name" name="name" type="text" autocomplete="name" required minlength="2" maxlength="120"></div>
+        <div class="row">
+          <div class="field"><label for="a-first">{e(c['first_name'])} <span class="req">*</span></label>
+            <input id="a-first" name="first_name" type="text" autocomplete="given-name" required maxlength="60"></div>
+          <div class="field"><label for="a-last">{e(c['last_name'])} <span class="req">*</span></label>
+            <input id="a-last" name="last_name" type="text" autocomplete="family-name" required maxlength="59"></div>
+        </div>
         <div class="row">
           <div class="field"><label for="a-email">{e(c['email'])} <span class="req">*</span></label>
             <input id="a-email" name="email" type="email" autocomplete="email" required maxlength="254"></div>

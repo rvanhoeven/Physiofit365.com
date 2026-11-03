@@ -18,8 +18,8 @@
   if (!form) return;
 
   // Arriving from a "contact" button (#form): put the cursor in the first field
-  if (location.hash === "#form" && form.elements.name) {
-    setTimeout(function () { try { form.elements.name.focus({ preventScroll: true }); } catch (e) {} }, 350);
+  if (location.hash === "#form" && form.elements.first_name) {
+    setTimeout(function () { try { form.elements.first_name.focus({ preventScroll: true }); } catch (e) {} }, 350);
   }
 
   // Arriving from the "where does it hurt" list: fill in the subject
@@ -71,7 +71,8 @@
 
     var v = function (n) { var s = form.elements[n].value.trim(); return s ? s : null; };
     var row = {
-      name: v("name"),
+      first_name: v("first_name"),
+      last_name: v("last_name"),
       email: v("email"),
       phone: v("phone"),
       town: v("town"),
@@ -213,7 +214,7 @@
 
       var v = function (n) { var s = form.elements[n].value.trim(); return s ? s : null; };
       var row = {
-        name: v("name"), email: v("email"), phone: v("phone"), address: v("address"), town: v("town"),
+        first_name: v("first_name"), last_name: v("last_name"), email: v("email"), phone: v("phone"), address: v("address"), town: v("town"),
         service: v("service"), message: v("message"),
         requested_date: iso(selected), requested_time: time.value,
         language: lang, browser_language: browserLanguage(),

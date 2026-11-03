@@ -41,8 +41,8 @@
     "cta_primary": "Stel een vraag",
     "cta_secondary": "Bekijk de behandelingen",
     "badges": [
-      "Gediplomeerd fysiotherapeut, nr. 6048",
-      "Geregistreerd verpleegkundige",
+      "Gediplomeerd fysiotherapeut, nr. 6.048",
+      "Geregistreerd verpleegkundige, nr. 18.067",
       "English · Nederlands · Español"
     ],
     "services_title": "Waarmee wij u helpen",
@@ -265,7 +265,7 @@
     "education_title": "Opleiding",
     "education": "Mellany studeerde in 2017 af als fysiotherapeut aan de UCH CEU Universiteit in Elche (Spanje). Drie jaar later studeerde zij ook af als volledig geregistreerd verpleegkundige. Haar bijzondere interesse gaat uit naar manuele therapie en sportrevalidatie.",
     "registration_title": "Beroepsregistratie",
-    "registration": "Illustere Officiële Orde van Fysiotherapeuten van de Valenciaanse Gemeenschap (Colegio Oficial de Fisioterapeutas de la Comunidad Valenciana), nummer 6048. Daarnaast is Mellany ingeschreven bij de beroepsorde van verpleegkundigen.",
+    "registration": "Mellany staat als fysiotherapeut en als verpleegkundige ingeschreven bij de twee officiële beroepsorden in Spanje.",
     "career_title": "Loopbaan",
     "career": "Tijdens haar zeven jaar aan de universiteit werkte Mellany als fysiotherapeut in diverse openbare en particuliere ziekenhuizen, en daarnaast bij particuliere praktijken, instituten en revalidatiecentra van de overheid.",
     "quals_title": "Kwalificaties",
@@ -333,7 +333,6 @@
     "intro": "Stel uw vraag telefonisch of stuur ons een bericht via het formulier hieronder. Uw bericht gaat rechtstreeks naar ons team en wij antwoorden zo snel mogelijk.",
     "details_title": "Onze gegevens",
     "form_title": "Stuur ons een bericht",
-    "name": "Naam",
     "email": "E-mail",
     "phone": "Telefoonnummer",
     "town": "Woonplaats of regio",
@@ -360,7 +359,9 @@
     "success": "Wij nemen zo snel mogelijk contact met u op, tijdens de openingstijden.",
     "error": "Er ging iets mis bij het versturen. Probeer het opnieuw, of bel of mail ons rechtstreeks.",
     "invalid": "Controleer de gemarkeerde velden.",
-    "not_configured": "Het formulier is nog niet gekoppeld. Bel of mail ons rechtstreeks."
+    "not_configured": "Het formulier is nog niet gekoppeld. Bel of mail ons rechtstreeks.",
+    "first_name": "Voornaam",
+    "last_name": "Achternaam"
   },
   "privacy": {
     "title": "Privacybeleid",
@@ -463,5 +464,14 @@
     "err_date": "Kies een datum.",
     "err_time": "Kies een tijd.",
     "err_full": "Deze datum is niet meer beschikbaar. Kies een andere datum."
+  },
+  "registers": {
+    "title": "Officieel geregistreerd",
+    "sub": "Mellany staat ingeschreven bij twee beroepsorden. U kunt dit zelf nakijken.",
+    "physio_role": "Fysiotherapeut",
+    "nurse_role": "Verpleegkundige",
+    "number": "Registratienummer",
+    "physio_link": "Naar de beroepsorde",
+    "nurse_link": "Bekijk het register"
   }
 }

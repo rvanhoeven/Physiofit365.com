@@ -62,8 +62,12 @@
           <small>Las visitas son por la tarde, a partir de las 17:30. Una sesión suele durar entre 45 y 60 minutos.</small>
         </fieldset>
         <h3>3. Tus datos</h3>
-        <div class="field"><label for="a-name">Nombre <span class="req">*</span></label>
-          <input id="a-name" name="name" type="text" autocomplete="name" required minlength="2" maxlength="120"></div>
+        <div class="row">
+          <div class="field"><label for="a-first">Nombre <span class="req">*</span></label>
+            <input id="a-first" name="first_name" type="text" autocomplete="given-name" required maxlength="60"></div>
+          <div class="field"><label for="a-last">Apellidos <span class="req">*</span></label>
+            <input id="a-last" name="last_name" type="text" autocomplete="family-name" required maxlength="59"></div>
+        </div>
         <div class="row">
           <div class="field"><label for="a-email">Correo electrónico <span class="req">*</span></label>
             <input id="a-email" name="email" type="email" autocomplete="email" required maxlength="254"></div>

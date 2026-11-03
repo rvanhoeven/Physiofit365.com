@@ -41,8 +41,8 @@
     "cta_primary": "Haz una consulta",
     "cta_secondary": "Ver tratamientos",
     "badges": [
-      "Fisioterapeuta colegiada n.º 6048",
-      "Enfermera colegiada",
+      "Fisioterapeuta colegiada n.º 6.048",
+      "Enfermera colegiada n.º 18.067",
       "English · Nederlands · Español"
     ],
     "services_title": "En qué podemos ayudarte",
@@ -265,7 +265,7 @@
     "education_title": "Formación",
     "education": "Mellany se graduó como fisioterapeuta en la Universidad CEU Cardenal Herrera (UCH CEU) de Elche en 2017. Tres años después se graduó también como enfermera colegiada. Le interesa especialmente la terapia manual y la rehabilitación deportiva.",
     "registration_title": "Colegiación profesional",
-    "registration": "Ilustre Colegio Oficial de Fisioterapeutas de la Comunidad Valenciana, n.º 6048. Mellany también está colegiada como enfermera.",
+    "registration": "Mellany está colegiada como fisioterapeuta y como enfermera en los dos colegios profesionales oficiales.",
     "career_title": "Trayectoria",
     "career": "Durante sus siete años de universidad, Mellany trabajó como fisioterapeuta en diversos hospitales públicos y privados, así como en consultas privadas, institutos y centros de rehabilitación públicos.",
     "quals_title": "Titulaciones",
@@ -333,7 +333,6 @@
     "intro": "Haz tu consulta por teléfono o envíanos un mensaje con el formulario. Tu mensaje llega directamente a nuestro equipo y respondemos lo antes posible.",
     "details_title": "Nuestros datos",
     "form_title": "Envíanos un mensaje",
-    "name": "Nombre",
     "email": "Correo electrónico",
     "phone": "Teléfono",
     "town": "Localidad o zona",
@@ -360,7 +359,9 @@
     "success": "Nos pondremos en contacto contigo lo antes posible, dentro del horario de atención.",
     "error": "Algo ha fallado al enviar. Inténtalo de nuevo o llámanos o escríbenos directamente.",
     "invalid": "Revisa los campos marcados.",
-    "not_configured": "El formulario aún no está conectado. Llámanos o escríbenos directamente."
+    "not_configured": "El formulario aún no está conectado. Llámanos o escríbenos directamente.",
+    "first_name": "Nombre",
+    "last_name": "Apellidos"
   },
   "privacy": {
     "title": "Política de privacidad",
@@ -463,5 +464,14 @@
     "err_date": "Elige una fecha.",
     "err_time": "Elige una hora.",
     "err_full": "Esta fecha ya no está disponible. Elige otra."
+  },
+  "registers": {
+    "title": "Colegiada oficialmente",
+    "sub": "Mellany está inscrita en dos colegios profesionales. Puedes comprobarlo tú mismo.",
+    "physio_role": "Fisioterapeuta",
+    "nurse_role": "Enfermera",
+    "number": "N.º de colegiada",
+    "physio_link": "Ir al colegio",
+    "nurse_link": "Consultar el registro"
   }
 }

@@ -59,8 +59,12 @@
     <div class="form-card" id="form">
       <h2>Envíanos un mensaje</h2>
       <form id="contact-form" novalidate data-lang="es" data-messages='{&quot;sending&quot;: &quot;Enviando…&quot;, &quot;submit&quot;: &quot;Enviar mensaje&quot;, &quot;error&quot;: &quot;Algo ha fallado al enviar. Inténtalo de nuevo o llámanos o escríbenos directamente.&quot;, &quot;invalid&quot;: &quot;Revisa los campos marcados.&quot;, &quot;not_configured&quot;: &quot;El formulario aún no está conectado. Llámanos o escríbenos directamente.&quot;}'>
-        <div class="field"><label for="f-name">Nombre <span class="req">*</span></label>
-          <input id="f-name" name="name" type="text" autocomplete="name" required minlength="2" maxlength="120"></div>
+        <div class="row">
+          <div class="field"><label for="f-first">Nombre <span class="req">*</span></label>
+            <input id="f-first" name="first_name" type="text" autocomplete="given-name" required maxlength="60"></div>
+          <div class="field"><label for="f-last">Apellidos <span class="req">*</span></label>
+            <input id="f-last" name="last_name" type="text" autocomplete="family-name" required maxlength="59"></div>
+        </div>
         <div class="row">
           <div class="field"><label for="f-email">Correo electrónico <span class="req">*</span></label>
             <input id="f-email" name="email" type="email" autocomplete="email" required maxlength="254"></div>

@@ -325,3 +325,15 @@ input:focus, select:focus, textarea:focus { outline: 3px solid var(--pink); outl
 @media (max-width: 420px) {
   .cal-day { min-height: 0; font-size: .9rem; }
 }
+
+/* professional registers */
+.registers { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 900px; margin-inline: auto; }
+.register { display: flex; flex-direction: column; align-items: center; text-align: center; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 26px 24px; box-shadow: var(--shadow); }
+.register-logo { display: flex; align-items: center; justify-content: center; height: 96px; margin-bottom: 16px; }
+.register-logo img { max-height: 96px; max-width: 240px; width: auto; }
+.register h3 { margin-bottom: 4px; }
+.register-no { margin: 0 0 6px; font-size: 1.05rem; }
+.register-no strong { font-size: 1.25rem; }
+.register-name { color: var(--muted); font-size: .94rem; line-height: 1.4; margin-bottom: 12px; }
+.register .more { margin-top: auto; }
+@media (max-width: 620px) { .registers { grid-template-columns: 1fr; } }
