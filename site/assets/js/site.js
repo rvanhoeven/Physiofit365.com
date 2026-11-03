@@ -15,6 +15,11 @@
   var form = document.getElementById("contact-form");
   if (!form) return;
 
+  // Arriving from a "contact" button (#form): put the cursor in the first field
+  if (location.hash === "#form" && form.elements.name) {
+    setTimeout(function () { try { form.elements.name.focus({ preventScroll: true }); } catch (e) {} }, 350);
+  }
+
   var msgs = {};
   try { msgs = JSON.parse(form.getAttribute("data-messages") || "{}"); } catch (e) {}
   var status = form.querySelector(".status");

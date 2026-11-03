@@ -78,6 +78,10 @@ class Ctx:
     def url(self, page, lang=None):
         return f"{self.up}{lang or self.lang}/{PATHS[page]}"
 
+    def form_url(self):
+        """Contact page, scrolled to the form."""
+        return self.url("contact") + "#form"
+
     def asset(self, p):
         return f"{self.up}assets/{p}"
 
@@ -87,7 +91,7 @@ def photo(ctx, mode="lazy"):
     if (SITE / "assets" / "img" / "mellany.jpg").exists():
         extra = ' fetchpriority="high"' if mode == "eager" else ' loading="lazy"'
         return (f'<img src="{ctx.asset("img/mellany.jpg")}" alt="Mellany Ginny van Hoeven" '
-                f'width="460" height="365"{extra}>')
+                f'width="1024" height="813"{extra}>')
     return (f'<div class="photo-placeholder" role="img" aria-label="Mellany Ginny van Hoeven">'
             f'<img src="{ctx.asset("img/logo.png")}" alt="" width="260"></div>')
 
@@ -133,7 +137,7 @@ def cur(cond, val):
 
 def header(ctx):
     t = ctx.t
-    nav_items = ["home", "about", "services", "faq", "contact"]
+    nav_items = ["home", "about", "services", "faq"]   # contact lives in the pink button
     links = "".join(
         f'<li><a href="{ctx.url(p)}"{cur(p == ctx.page, "page")}>{e(t["nav"][p])}</a></li>'
         for p in nav_items
@@ -156,7 +160,7 @@ def header(ctx):
     <nav id="nav" class="nav" aria-label="{e(t['nav']['menu'])}">
       <ul>{links}</ul>
       <div class="lang" role="group" aria-label="{e(t['nav']['language'])}">{langs}</div>
-      <a class="btn btn-sm" href="{ctx.url('contact')}">{e(t['nav']['cta'])}</a>
+      <a class="btn btn-sm" href="{ctx.form_url()}"{cur(ctx.page == "contact", "page")}>{e(t['nav']['cta'])}</a>
     </nav>
   </div>
 </header>
@@ -216,7 +220,7 @@ def cta_band(ctx, title, text, label):
   <div class="wrap">
     <h2>{e(title)}</h2>
     <p>{e(text)}</p>
-    <a class="btn btn-light" href="{ctx.url('contact')}">{e(label)}</a>
+    <a class="btn btn-light" href="{ctx.form_url()}">{e(label)}</a>
   </div>
 </section>
 """
@@ -268,7 +272,7 @@ def page_home(ctx):
       <h1>{e(h['hero_title'])}</h1>
       <p class="lead">{e(h['hero_sub'])}</p>
       <div class="actions">
-        <a class="btn" href="{ctx.url('contact')}">{e(h['cta_primary'])}</a>
+        <a class="btn" href="{ctx.form_url()}">{e(h['cta_primary'])}</a>
         <a class="btn btn-ghost" href="{ctx.url('services')}">{e(h['cta_secondary'])}</a>
       </div>
       <ul class="badges">{badges}</ul>
@@ -437,7 +441,7 @@ def page_contact(ctx):
         <li>{ico('home')}<span>{e(com['area'])}</span></li>
       </ul>
     </aside>
-    <div class="form-card">
+    <div class="form-card" id="form">
       <h2>{e(c['form_title'])}</h2>
       <form id="contact-form" novalidate data-lang="{ctx.lang}" data-messages='{e(msgs, quote=True)}'>
         <div class="field"><label for="f-name">{e(c['name'])} <span class="req">*</span></label>
