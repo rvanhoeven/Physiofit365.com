@@ -360,3 +360,17 @@ input:focus, select:focus, textarea:focus { outline: 3px solid var(--pink); outl
   .wa-float svg { width: 30px; height: 30px; }
   .site-footer { padding-bottom: 84px; }
 }
+
+/* logo in the dark band: jumps up and bounces back, every 5 seconds */
+.swirl img { animation: logo-bounce 5s ease-in-out infinite; transform-origin: 50% 100%; will-change: transform; }
+@keyframes logo-bounce {
+  0%, 70%, 100% { transform: translateY(0) scale(1, 1); }
+  72%  { transform: translateY(0) scale(1.05, .95); }
+  79%  { transform: translateY(-56px) scale(.98, 1.02); animation-timing-function: ease-in; }
+  86%  { transform: translateY(0) scale(1.06, .94); }
+  90%  { transform: translateY(-20px) scale(1, 1); animation-timing-function: ease-in; }
+  94%  { transform: translateY(0) scale(1.03, .97); }
+  96%  { transform: translateY(-6px) scale(1, 1); animation-timing-function: ease-in; }
+  98%  { transform: translateY(0) scale(1, 1); }
+}
+@media (prefers-reduced-motion: reduce) { .swirl img { animation: none; } }
