@@ -360,6 +360,7 @@
     "success_title": "Thank you, your message is on its way",
     "success": "We will get back to you as soon as we can, during opening hours.",
     "error": "Something went wrong while sending. Please try again, or call or email us directly.",
+    "err_limit": "You have already sent us two requests in the last 24 hours. Please call or email us directly.",
     "invalid": "Please check the highlighted fields.",
     "not_configured": "The form is not connected yet. Please call or email us directly.",
     "first_name": "First name",

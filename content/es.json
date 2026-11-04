@@ -360,6 +360,7 @@
     "success_title": "Gracias, tu mensaje está en camino",
     "success": "Nos pondremos en contacto contigo lo antes posible, dentro del horario de atención.",
     "error": "Algo ha fallado al enviar. Inténtalo de nuevo o llámanos o escríbenos directamente.",
+    "err_limit": "Ya nos has enviado dos solicitudes en las últimas 24 horas. Llámanos o escríbenos directamente.",
     "invalid": "Revisa los campos marcados.",
     "not_configured": "El formulario aún no está conectado. Llámanos o escríbenos directamente.",
     "first_name": "Nombre",

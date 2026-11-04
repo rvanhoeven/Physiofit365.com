@@ -98,11 +98,11 @@
       },
       body: JSON.stringify(row)
     }).then(function (res) {
-      if (!res.ok) throw new Error("HTTP " + res.status);
+      if (!res.ok) { var err = new Error("HTTP " + res.status); err.status = res.status; throw err; }
       form.hidden = true;
       form.parentNode.querySelector(".success").hidden = false;
-    }).catch(function () {
-      setStatus(msgs.error, true);
+    }).catch(function (err) {
+      setStatus(err.status === 429 ? msgs.err_limit : msgs.error, true);
       submit.disabled = false;
       submit.textContent = msgs.submit;
     });
@@ -240,7 +240,7 @@
         ok.focus();
       }).catch(function (err) {
         // 401/403 = the database refused the date, for instance a page left open for days
-        setStatus(err.status === 401 || err.status === 403 ? msgs.err_full : msgs.error, true);
+        setStatus(err.status === 429 ? msgs.err_limit : err.status === 401 || err.status === 403 ? msgs.err_full : msgs.error, true);
         submit.disabled = false;
         submit.textContent = msgs.submit;
       });

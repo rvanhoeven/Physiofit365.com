@@ -360,6 +360,7 @@
     "success_title": "Bedankt, uw bericht is onderweg",
     "success": "Wij nemen zo snel mogelijk contact met u op, tijdens de openingstijden.",
     "error": "Er ging iets mis bij het versturen. Probeer het opnieuw, of bel of mail ons rechtstreeks.",
+    "err_limit": "U heeft de afgelopen 24 uur al twee aanvragen verstuurd. Bel of mail ons gerust rechtstreeks.",
     "invalid": "Controleer de gemarkeerde velden.",
     "not_configured": "Het formulier is nog niet gekoppeld. Bel of mail ons rechtstreeks.",
     "first_name": "Voornaam",
