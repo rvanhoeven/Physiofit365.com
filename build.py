@@ -614,7 +614,7 @@ def page_contact(ctx):
         "{privacy_link}", f'<a href="{ctx.url("privacy")}">{e(c["privacy_link_text"])}</a>'
     )
     msgs = json.dumps(
-        {"sending": c["sending"], "submit": c["submit"], "error": c["error"], "invalid": c["invalid"], "not_configured": c["not_configured"]},
+        {"sending": c["sending"], "submit": c["submit"], "error": c["error"], "err_limit": c["err_limit"], "invalid": c["invalid"], "not_configured": c["not_configured"]},
         ensure_ascii=False,
     )
     body = f"""
@@ -687,7 +687,7 @@ def page_appointment(ctx):
         "{privacy_link}", f'<a href="{ctx.url("privacy")}">{e(c["privacy_link_text"])}</a>'
     )
     msgs = json.dumps(
-        {"sending": c["sending"], "submit": a["submit"], "error": c["error"], "invalid": c["invalid"], "not_configured": c["not_configured"],
+        {"sending": c["sending"], "submit": a["submit"], "error": c["error"], "err_limit": c["err_limit"], "invalid": c["invalid"], "not_configured": c["not_configured"],
          "prev": a["prev"], "next": a["next"], "err_date": a["err_date"], "err_time": a["err_time"], "err_full": a["err_full"]},
         ensure_ascii=False,
     )
